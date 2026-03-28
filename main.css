@@ -7,7 +7,7 @@
     --text-color: #000000;
     --hovertext-color: #858585e9;
     --primary-color: #94C1FF;
-    --secondary-color: #F56597;
+    --secondary-color: #B85842;
     --color-1: #F9F6F3;
     --color-2: #F3F7F9;
     --color-3: #F6F3F9;
@@ -39,7 +39,7 @@ h1, h2, h3 {
 
 nav {
     margin: 1em auto 2em auto;
-    width: min(1000px, 100%);
+    width: min(1100px, 100%);
     
     border-radius: 30px;
     border: 3px solid rgba(255, 255, 255, 0.2);
@@ -79,7 +79,7 @@ header, section {
     padding: min(2em, 15%);
     border-radius: 20px;
     border: 3px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 34px 0 rgba(0, 0, 0, 0.3);
 }
 
 .flex-container {
@@ -138,7 +138,7 @@ h2 {
     font-size: 2em;
 }
 
-section p {jk.v 
+section p {
     margin-top: 1em;
     font-size: 1.25rem;
 }
@@ -151,12 +151,21 @@ section img {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-
-.article-container {
-    margin-bottom: 1.5em;
+.careertext-container p {
     display: flex;
-    justify-content: flex-start;
+    text-align: left;
+    font-size: 1.1rem;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 3em;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: 100;
+}
+
+.recaptext {
+    font-weight: 100;
 }
