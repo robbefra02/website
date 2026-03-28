@@ -138,7 +138,7 @@ h2 {
     font-size: 2em;
 }
 
-section p {
+section p {jk.v 
     margin-top: 1em;
     font-size: 1.25rem;
 }
@@ -149,4 +149,14 @@ section img {
     object-fit: cover;
     object-position: bottom;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.article-container {
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3em;
 }
