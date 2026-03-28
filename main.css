@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); /* Nunito font from Google */
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap'); /* Google sans font */
+
+:root {
+    --base-color: #0fffff;
+    --text-color: #000000;
+    --hovertext-color: #858585e9;
+    --primary-color: #94C1FF;
+    --secondary-color: #F56597;
+    --color-1: #F9F6F3;
+    --color-2: #F3F7F9;
+    --color-3: #F6F3F9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /*The font behind the first one are fallback fonts*/
+    font-family: Nunito, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /*var() is used for root variables*/
+    color: var(--text-color);
+}
+
+body {
+    padding: 1em;
+    background-image: url("images/RTechPattern.png");
+    background-repeat: repeat;
+    background-size: 50em;
+}
+
+h1, h2, h3 {
+    font-family: 'Google sans', Nunito, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav {
+    margin: 1em auto 2em auto;
+    width: min(1000px, 100%);
+    
+    border-radius: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.254);
+}
+
+nav ul {
+    margin: 1.5em 1.5em 1.5em 1.5em;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 2em;
+}
+
+nav li:first-child {
+    margin-right: auto;
+    font-family: 'Google sans', Nunito, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+nav a:hover {
+    text-decoration: underline;
+    color: var(--hovertext-color);
+}
+
+header, section {
+    margin: 2em auto;
+    width: min(75em, 100%);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: min(2em, 15%);
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.flex-container {
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3em;
+
+}
+
+header img {
+    max-width: 100%;
+    border-radius: 1em;
+    object-fit: cover;
+    object-position: bottom;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.text-container {
+    flex: 0 1 40em;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.text-container p {
+    margin: .75em 0 1em 0;
+    font-size: 1.1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: var(--primary-color);
+    padding: .75em 1.25em;
+    border-radius: .5em;
+    font-weight: 600;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.secondary {
+    margin-top: 0.5em;
+    background-color: var(--secondary-color);
+}
+
+section {
+    padding: 3em min(2em, 15%);
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+section p {
+    margin-top: 1em;
+    font-size: 1.25rem;
+}
+
+section img {
+    max-width: 100%;
+    border-radius: 1em;
+    object-fit: cover;
+    object-position: bottom;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
