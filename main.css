@@ -6,8 +6,9 @@
     --base-color: #0fffff;
     --text-color: #000000;
     --hovertext-color: #858585e9;
-    --primary-color: #94C1FF;
-    --secondary-color: #B85842;
+    --button-color: rgba(80, 115, 230, 0.5);
+    --hoverbutton-color: rgba(233, 198, 81, 0.1);
+    --secondarybutton-color: rgba(80, 190, 230, 0.5);
     --color-1: #F9F6F3;
     --color-2: #F3F7F9;
     --color-3: #F6F3F9;
@@ -117,16 +118,25 @@ h1 {
     display: inline-block;
     text-decoration: none;
     color: white;
-    background-color: var(--primary-color);
+    margin-right: .5em;
     padding: .75em 1.25em;
     border-radius: .5em;
     font-weight: 600;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    background: var(--button-color);
+}
+
+
+.cta-button:hover {
+    background: var(--hoverbutton-color);
+    color:rgba(0, 0, 0, 0.4);
 }
 
 .secondary {
     margin-top: 0.5em;
-    background-color: var(--secondary-color);
+    background: var(--secondarybutton-color);
+    
 }
 
 section {
@@ -151,14 +161,17 @@ section img {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+.careertext-container {
+    display: flex;
+    text-align: left;
+    font-size: 1.1rem;
+    width: 90%;
+    margin: auto;
+}
 .careertext-container p {
     display: flex;
     text-align: left;
     font-size: 1.1rem;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    margin: auto;
 }
 
 h3 {
