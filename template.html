@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template referentie (niet gelinkt in nav)</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Robbe Fransen</a></li>
+            <li><a href="career.html">Carrière</a></li>
+            <li><a href="projects.html">Projecten</a></li>
+            <li><a href="scholar.html">School</a></li>
+            <li><a href="traveling.html">Reizen</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="layout-full center">
+            <h1>Template referentie</h1>
+            <p>Deze pagina staat niet in de navigatie. Het is een live demo van de drie sectie-templates.
+            Kopieer een sectie hieronder (uit de broncode) en plak ze in eender welke pagina.
+            Alle styling/kleuren pas je aan in het THEME CONFIG blok bovenaan main.css.</p>
+        </section>
+
+        <!-- ============================================================
+             TEMPLATE A: ROW
+             Tekst + afbeeldingen naast elkaar. Volgorde in de HTML = volgorde op de pagina.
+             Optioneel: --img-w aanpassen voor bredere/smallere afbeeldingen.
+        ============================================================ -->
+        <section class="layout-row" style="--img-w: 18em;">
+            <img src="images/ProfilePic.jpg" alt="">
+            <div class="text-container">
+                <h2>Template A: row</h2>
+                <h3>Optionele subtitel</h3>
+                <p>Tekst en afbeeldingen naast elkaar. Op mobiel klapt dit automatisch onder elkaar.
+                Zet de afbeelding voor of na de text-container om de kant te kiezen.</p>
+                <a href="#" class="cta-button">Knop</a>
+                <a href="#" class="cta-button secondary">Tweede knop</a>
+            </div>
+            <details>
+                <summary>Optioneel uitklapblok</summary>
+                <p>Langere tekst die standaard dichtgeklapt is.</p>
+            </details>
+        </section>
+
+        <!-- ============================================================
+             TEMPLATE B: GRID
+             Gelijke kolommen. Verander --cols voor meer/minder kolommen.
+             h2 en .full-row spannen automatisch de volledige breedte.
+        ============================================================ -->
+        <section class="layout-grid center" style="--cols: 3;">
+            <h2>Template B: grid (--cols: 3)</h2>
+            <div class="full-row text-container">
+                <p>Intro-tekst over de volledige breedte. Daaronder cellen in een raster. Op mobiel wordt dit één kolom.</p>
+            </div>
+            <img src="images/randomcollection/LegoUpHouse.JPG" alt="">
+            <img src="images/randomcollection/OnTheRoad.jpg" alt="">
+            <img src="images/randomcollection/PartyTime.JPG" alt="">
+        </section>
+
+        <!-- Zelfde template, 2 kolommen met tekstcellen -->
+        <section class="layout-grid" style="--cols: 2;">
+            <h2 class="center">Template B: grid (--cols: 2, met tekst)</h2>
+            <div>
+                <h3>Cel 1</h3>
+                <p>Een grid-cel kan ook gewoon tekst zijn in plaats van een afbeelding.</p>
+            </div>
+            <div>
+                <h3>Cel 2</h3>
+                <p>Handig voor een overzicht van projecten, reizen, skills, ...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             TEMPLATE C: FULL
+             Eén groot blok, alles onder elkaar over de volledige breedte.
+        ============================================================ -->
+        <section class="layout-full center">
+            <h2>Template C: full</h2>
+            <p>Eén grote sectie. Goed voor contact, intro's of een grote foto.</p>
+            <img src="images/randomcollection/EatingInHongkong.JPG" alt="">
+        </section>
+    </main>
+</body>
+</html>

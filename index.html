@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robbe - home</title>
+    <title>Robbe - Home</title>
 
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Robbe Fransen</a></li>
-                <li><a href="career.html">Carrière</a></li>
-                <li><a href="personal.html">Projecten</a></li>
-                <li><a href="scholar.html">Schoolgewijs</a></li>
-                <li><a href="traveling.html">Reizen</a></li>
-            </ul>
-        </nav>
-        <div class="flex-container">
-            <img width="300px" src="images/ProfilePic.jpg">
+    <nav>
+        <ul>
+            <li><a href="index.html" aria-current="page">Robbe Fransen</a></li>
+            <li><a href="career.html">Carrière</a></li>
+            <li><a href="projects.html">Projecten</a></li>
+            <li><a href="scholar.html">School</a></li>
+            <li><a href="traveling.html">Reizen</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- TEMPLATE: row (text + image side by side) -->
+        <section class="layout-row">
+            <img src="images/ProfilePic.jpg" alt="Profielfoto van Robbe">
             <div class="text-container">
                 <h1>Hey daar!</h1>
                 <p>Ik ben Robbe.<br>
@@ -27,31 +29,24 @@
                 <a href="https://www.youtube.com/@robbeoptinternet" class="cta-button" target="_blank">Volg mij op Youtube</a>
                 <a href="personal.html" class="cta-button secondary">Mijn persoonlijke projecten</a>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <section>
-        <div class="flex-container">
-            <div class="text-container">
-                <h2>Wat is hier allemaal te zien?</h2>
+        <!-- TEMPLATE: grid (3 kolommen, pas aan met --cols) -->
+        <section class="layout-grid center" style="--cols: 3;">
+            <h2>Wat is hier allemaal te zien?</h2>
+            <div class="full-row text-container">
                 <p>De titels bovenaan zijn vrij verklarend: Ik heb enkele subpagina's op mijn website die alles netjes categoriseren. Het gaat hier voornamelijk om mijzelf te uiten: Ik doe zoveel dingen dat het soms nogal moeilijk is om mezelf te beschrijven.<br><br>Naast computerproblemen oplossen, producten ontwikkelen, de wereld rond reizen.. ga ik ook heel graag feesten of e-skaten bijvoorbeeld. Ik heb eigenlijk teveel hobby's om zelf te onthouden (waar ik sowieso al niet erg goed in ben) en dit is mijn oplossing om het toch wat overzichtelijk te maken.</p>
             </div>
-            <img height="300px" src="images/randomcollection/EatingInHongkong.JPG" alt="Me and my cousin having hotpot in Hong Kong">
-            <img width="300px" src="images/randomcollection/S22U cool.JPEG" alt="Mijn transparante Samsung S22 Ultra">
-            <img width="600px" src="images/randomcollection/PartyTime.JPG" alt="Vaag Outdoor mainstage 2024">
-        </div>
-    </section>
+            <img src="images/randomcollection/EatingInHongkong.JPG" alt="Mijn nicht en ik eten hotpot in Hong Kong">
+            <img src="images/randomcollection/S22U cool.JPEG" alt="Mijn transparante Samsung S22 Ultra">
+            <img src="images/randomcollection/PartyTime.JPG" alt="Vaag Outdoor mainstage 2024">
+        </section>
 
-    <section>
-        <div class="flex-container">
-            <div class="text-container">
-                <h2>Contact</h2>
-                <p>Voorlopig link ik <a href="https://www.instagram.com/robbefra02/">hier</a> even naar mijn Instagram account. Daar kan je altijd beriken voor vragen en inlichtingen. Als ik er nog aan denk komt er hier ook een email form.</p>
-                
-            </div>
-        </div>
-    </section>
-
-
+        <!-- TEMPLATE: full (één groot blok) -->
+        <section class="layout-full center">
+            <h2>Contact</h2>
+            <p>Voorlopig link ik <a href="https://www.instagram.com/robbefra02/">hier</a> even naar mijn Instagram account. Daar kan je me altijd bereiken voor vragen en inlichtingen. Als ik er nog aan denk komt er hier ook een email form.</p>
+        </section>
+    </main>
 </body>
 </html>
