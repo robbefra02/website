@@ -1,15 +1,46 @@
 {%- comment -%}
-  Top bar, sticky. Session 1: monogram + name + theme toggle.
-  Session 2 adds the category menu and the "Pause waves" button.
+  Top bar, sticky: monogram + name, category menu, theme toggle, pause button.
+  The menu is built from _data/categories.yml; the words come from _data/i18n.yml.
+  aria-current tells screen readers (and our CSS) which menu item you're on:
+  "page" = this IS that page, "true" = you're inside that section (e.g. a post in Repair).
 {%- endcomment -%}
+{%- assign home_url = "/" | append: lang | append: "/" -%}
 <header class="site-header glass">
-  <a class="brand" href="/{{ lang }}/">
+  <a class="brand" href="{{ home_url }}">
     <svg width="36" height="33" aria-hidden="true" focusable="false"><use href="#rf"/></svg>
     <span>{{ site.title }}</span>
   </a>
+
+  <nav class="site-nav" aria-label="{{ t.site_nav }}">
+    <ul>
+      <li><a href="{{ home_url }}"{% if page.url == home_url %} aria-current="page"{% endif %}>{{ t.home }}</a></li>
+      {%- for key in site.data.categories %}
+      <li><a href="{{ home_url }}{{ key }}/"
+        {%- if page.category == key and page.layout == "category" %} aria-current="page"
+        {%- elsif page.category == key %} aria-current="true"{% endif %}>{{ t.categories[key] }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+
   <div class="header-tools">
-    {%- comment -%} The button's text is filled in by theme.js; these labels are the text in each language {%- endcomment %}
-    <button class="btn-sm" type="button" id="theme-toggle" hidden
-            data-label-light="{{ t.theme_to_light }}" data-label-dark="{{ t.theme_to_dark }}">{{ t.theme_to_light }}</button>
+    {%- comment -%}
+      Both buttons start hidden: they only work with JavaScript, so the scripts show them.
+      The text is filled in by the scripts from these data- labels (one per language).
+      On phones only the icon shows; the text stays for screen readers.
+    {%- endcomment %}
+    <button class="btn-sm icon-btn" type="button" id="theme-toggle" hidden
+            data-label-light="{{ t.theme_to_light }}" data-label-dark="{{ t.theme_to_dark }}">
+      <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#icon-sun"/></svg>
+      <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#icon-moon"/></svg>
+      <span class="label">{{ t.theme_to_light }}</span>
+    </button>
+    {%- unless page.waves == false %}
+    <button class="btn-sm icon-btn" type="button" data-motion-toggle hidden
+            data-label-pause="{{ t.waves_pause }}" data-label-play="{{ t.waves_play }}">
+      <svg class="icon icon-pause" aria-hidden="true" focusable="false"><use href="#icon-pause"/></svg>
+      <svg class="icon icon-play" aria-hidden="true" focusable="false"><use href="#icon-play"/></svg>
+      <span class="label">{{ t.waves_pause }}</span>
+    </button>
+    {%- endunless %}
   </div>
 </header>

@@ -25,7 +25,7 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Brand deliverables done (Oct 2026): tokens.css, waves.js, brand-guide.md, logo-rules.md + logo files, style-tile.html, CLAUDE.md.
 
 ## To do (Robbe)
-- [ ] **Add the Clash Display font as a GitHub secret** (`CLASH_DISPLAY_WOFF2_BASE64`), steps in `brand/fonts/README.md`. Until then, headings use the fallback font on the live site.
+- [x] **Add the Clash Display font as a GitHub secret** (`CLASH_DISPLAY_WOFF2_BASE64`) - done, the live site uses Clash Display.
 - [ ] **GitHub Student Developer Pack** (free GitHub Pro). No longer needed for the font (the secret solves that), still worth having: private repo option and other student perks.
   - [x] Delete the old separate school GitHub account (done, frees up the school email)
   - [ ] Add the KdG school email to the primary GitHub account (Settings → Emails) and verify it
@@ -36,8 +36,9 @@ Things that are decided "later". Read this at the start of every brand or site s
 
 ## Done
 - Coding session 1 (foundation): Jekyll deploy workflow, base layout, header with theme toggle, `/nl/` placeholder page.
+- Coding session 2: category menu, wave field with pause button (remembered between pages), footer with contact links, 6 placeholder category pages, workflow on Node 24 actions.
 
 ## Still open
-- **Clash Display + public repo:** solved in coding session 1. The font stays out of git; the deploy workflow writes it from a repo secret during the build. Needs the one-time secret setup above.
 - Sync: start with "ask Claude to sync" (Notion connector), later a GitHub Action (needs NOTION_TOKEN + NOTION_DATABASE_ID secrets).
 - Light theme: built and contrast-checked, but not yet reviewed by Robbe.
+- Footer links (`_data/links.yml`) were copied from the old site: confirm Instagram, YouTube, LinkedIn are the ones to show.

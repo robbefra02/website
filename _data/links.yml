@@ -1,0 +1,9 @@
+# Contact and social links, shown in the footer of every page (same place everywhere: WCAG 3.2.6).
+# Copied from the old site - check that these are still the ones you want.
+# Remove a line to hide that link; add one with a name and url to show a new one.
+- name: Instagram
+  url: "https://www.instagram.com/robbefra02/"
+- name: YouTube
+  url: "https://www.youtube.com/@robbeoptinternet"
+- name: LinkedIn
+  url: "https://www.linkedin.com/in/robbe-fransen-351b36248/"

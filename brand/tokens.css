@@ -132,6 +132,8 @@
   --focus-offset: 3px;                              /* gap between element and focus ring */
   --border-width: 1px;                              /* glass edges, buttons, tags */
   --link-hover-thickness: 2px;                      /* underline gets bolder on hover */
+  --indicator-width: 2px;                           /* underline under the menu item of the section you're in */
+  --icon-size: 1.125rem;                            /* 18px icons in buttons (sun, moon, pause, play) */
 
   /* --- Color: the wave motif (read by waves.js through data- attributes, listed here as the reference) --- */
   --wave-from: var(--cream-300);                    /* back lines */
@@ -185,7 +187,7 @@
   --width-content: 72rem;   /* max width of the page */
   --width-prose: 42rem;     /* max width of running text (~70 characters per line) */
   --gutter: 1rem;           /* minimum space left and right on phones */
-  --header-offset: 6rem;    /* height of the sticky header + gap: anchors and focus land below it */
+  --header-offset: 9rem;    /* sticky header height (2 rows on tablets) + gap: anchors and focus land below it */
 
   /* --- Click/tap targets (WCAG 2.5.8 asks for 24px minimum; we aim higher) --- */
   --target-min: 44px;       /* buttons, nav links */

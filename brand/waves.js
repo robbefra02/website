@@ -22,7 +22,11 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // One switch for all ambient waves, flipped by any button with data-motion-toggle.
+  // It's remembered between pages, so a visitor who paused doesn't get moving waves again on the next page.
   let ambientPaused = false;
+  try {
+    ambientPaused = localStorage.getItem('waves-paused') === 'true';
+  } catch (e) { /* storage blocked: start playing */ }
 
   // Turn a piece of text into a number, so the same title always gives the same wave.
   function hash(text) {
@@ -203,16 +207,37 @@
   });
 
   // Pause/play button for ambient waves (WCAG 2.2.2: moving content needs a pause control).
+  // Its labels come from data-label-pause / data-label-play, so every language gets its own words.
+  const somethingMoves = !reduceMotion && document.querySelector('svg[data-waves][data-motion="ambient"]');
   document.querySelectorAll('[data-motion-toggle]').forEach(function (btn) {
+    // Nothing moves on its own (no ambient waves, or "reduce motion" is on): the button isn't needed.
+    if (!somethingMoves) {
+      btn.hidden = true;
+      return;
+    }
+    const label = btn.querySelector('.label') || btn; // text goes in a .label span if there is one
+
+    function show() {
+      btn.dataset.state = ambientPaused ? 'paused' : 'playing'; // CSS shows the play or pause icon based on this
+      label.textContent = ambientPaused
+        ? (btn.dataset.labelPlay || 'Play waves')   // paused: the button offers to play again
+        : (btn.dataset.labelPause || 'Pause waves'); // playing: the button offers to pause
+    }
+
     btn.addEventListener('click', function () {
       ambientPaused = !ambientPaused;
-      btn.setAttribute('aria-pressed', String(ambientPaused)); // tells screen readers the state
-      btn.textContent = ambientPaused ? 'Play waves' : 'Pause waves';
+      try {
+        localStorage.setItem('waves-paused', String(ambientPaused)); // remember for the next page
+      } catch (e) { /* storage blocked: the choice lasts for this page only */ }
+      show();
       if (!ambientPaused) {
         document.querySelectorAll('svg[data-motion="ambient"]').forEach(function (s) {
           s.dispatchEvent(new Event('waves:resume'));
         });
       }
     });
+
+    show();
+    btn.hidden = false; // JavaScript works and something moves: show the button
   });
 })();

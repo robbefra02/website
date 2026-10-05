@@ -18,10 +18,14 @@
     return root.dataset.theme || (systemLight.matches ? 'light' : 'dark');
   }
 
+  const label = button.querySelector('.label') || button; // the text part of the button (next to the icon)
+
   // The button says where it will take you: "Licht thema" while dark, "Donker thema" while light.
   // The words come from data- attributes, so every language gets its own label (_data/i18n.yml).
   function updateButton() {
-    button.textContent = currentTheme() === 'dark' ? button.dataset.labelLight : button.dataset.labelDark;
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    button.dataset.next = next; // CSS shows the sun icon when next is light, the moon when next is dark
+    label.textContent = next === 'light' ? button.dataset.labelLight : button.dataset.labelDark;
   }
 
   button.addEventListener('click', function () {

@@ -15,7 +15,13 @@ Robbe Fransen's personal site: a **personal log** (projects, school, travel, rep
 - **No npm, no bundlers, no build tools, no `package.json`** in the site. (Tooling like the Notion sync may run in a GitHub Action, but it never adds a build step to the site itself.)
 - No external CDNs for fonts, CSS or JS. Everything self-hosted.
 - Deploy: `.github/workflows/pages.yml` builds with Jekyll (`actions/jekyll-build-pages`). On a pull request it only builds (a red check = broken build); on `main` it also publishes. GitHub's default theme is switched off (`theme: null` in `_config.yml`).
-- Site structure: `_layouts/base.html` (frame of every page), `_includes/` (head, icons, header), `_data/i18n.yml` (interface text per language), `assets/css/site.css`, `assets/js/`. Pages per language in `/nl/`, `/en/`, `/fr/`.
+- Site structure:
+  - `_layouts/base.html` - frame of every page (wave field, header, footer, scripts). `waves: false` in a page's front matter turns the waves off.
+  - `_layouts/category.html` - category pages (`/nl/<category>/`)
+  - `_includes/` - head, icons (SVG sprite), header (menu + theme and pause buttons), footer
+  - `_data/i18n.yml` - interface text per language; `_data/categories.yml` - menu order; `_data/links.yml` - footer contact links
+  - `assets/css/site.css`, `assets/js/theme.js` (theme toggle), `assets/js/nav.js` (centers the active menu item on phones)
+  - Pages per language in `/nl/`, `/en/`, `/fr/`.
 
 ## Design rules
 
