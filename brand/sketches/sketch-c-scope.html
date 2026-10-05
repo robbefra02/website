@@ -211,6 +211,9 @@ a { color: var(--accent); text-underline-offset: .2em; }
 // data-motion  "ambient" = always moving slowly, "hover" = only moves while you point at it, "none" = static
 // data-trigger CSS selector of the element that wakes a "hover" wave (default: the svg's parent)
 // data-seed    any text; gives this wave its own unique shape (used for per-post waveforms)
+// data-lines-small  fewer lines on phones (saves battery)
+// data-scroll  ambient only: scrolling speeds the waves up, they calm down by themselves
+// data-cursor  ambient only: lines part around the mouse pointer, like a comb through hair
 (function () {
   // Ask the operating system if the visitor wants less motion (accessibility setting).
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -249,14 +252,23 @@ a { color: var(--accent); text-underline-offset: .2em; }
   }
 
   // Build the drawing instructions ("d" attribute) for one wavy line.
-  function wavePath(w, baseY, amp, freq, phase, offset) {
+  // lens = the cursor's influence (position, size, strength), or null when there is none.
+  function wavePath(w, baseY, amp, freq, phase, offset, lens) {
     let d = '';
     for (let x = 0; x <= w; x += 6) { // a point every 6 units is smooth enough and cheap
       const t = x / w;                 // 0 at the left edge, 1 at the right edge
       const swell = Math.sin(t * Math.PI); // calm at both edges, biggest in the middle
-      const y = baseY
+      let y = baseY
         + Math.sin(t * freq * 6.283 + phase + offset) * amp * swell             // main wave (6.283 = one full circle)
         + Math.sin(t * freq * 13 - phase * 0.6 + offset * 2) * amp * 0.25 * swell; // small ripple on top
+      if (lens && lens.presence > 0.01) {
+        const dx = x - lens.x;
+        const dy = y - lens.y;
+        // falloff: 1 right at the cursor, fading to 0 further away (a soft round "bubble")
+        const falloff = Math.exp(-(dx * dx + dy * dy) / (2 * lens.radius * lens.radius));
+        // push the line away from the cursor: lines above go up, lines below go down
+        y += Math.tanh(dy / (lens.radius * 0.4)) * lens.strength * lens.presence * falloff;
+      }
       d += (x === 0 ? 'M' : 'L') + x + ' ' + y.toFixed(1) + ' ';
     }
     return d;
@@ -264,7 +276,8 @@ a { color: var(--accent); text-underline-offset: .2em; }
 
   document.querySelectorAll('svg[data-waves]').forEach(function (svg) {
     const set = svg.dataset; // shortcut to all data- attributes
-    const lines = Number(set.lines || 12);
+    const small = window.innerWidth < 700 && set.linesSmall; // phone-sized screen?
+    const lines = Number(small ? set.linesSmall : (set.lines || 12));
     const baseAmp = Number(set.amp || 30);
     const seed = set.seed ? hash(set.seed) : 0;
     const freq = Number(set.freq || 1) + (seed % 7) / 6;   // seeded waves get their own rhythm
@@ -288,12 +301,19 @@ a { color: var(--accent); text-underline-offset: .2em; }
     let phase = seed / 1000; // start position, different per seed
     let energy = motion === 'hover' ? 0 : 1; // 0 = calm, 1 = fully "resonating"
     let target = energy;
+    let boost = 0; // extra speed from scrolling; fades out on its own
+
+    // The cursor "lens". x/y = where it is drawn, tx/ty = where the mouse really is.
+    // We move x/y a little toward tx/ty every frame, so the effect glides instead of jumping.
+    const lens = set.cursor !== undefined && motion === 'ambient'
+      ? { x: 0, y: 0, tx: 0, ty: 0, presence: 0, target: 0, radius: box.height * 0.16, strength: box.height * 0.1 }
+      : null;
 
     function draw() {
-      const amp = baseAmp * (0.3 + 0.7 * energy); // calm waves are 30% of full height
+      const amp = baseAmp * (0.3 + 0.7 * energy) * (1 + Math.min(boost * 6, 0.5)); // scrolling makes waves a bit taller too
       paths.forEach(function (p, i) {
         const baseY = box.height * 0.15 + box.height * 0.7 * (i / Math.max(lines - 1, 1));
-        p.setAttribute('d', wavePath(box.width, baseY, amp, freq, phase, i * spread));
+        p.setAttribute('d', wavePath(box.width, baseY, amp, freq, phase, i * spread, lens));
       });
     }
     draw(); // always draw once, so reduced-motion visitors still see the static shape
@@ -304,7 +324,17 @@ a { color: var(--accent); text-underline-offset: .2em; }
     function tick() {
       energy += (target - energy) * 0.06; // ease toward the target instead of jumping
       const moving = motion === 'ambient' ? !ambientPaused : energy > 0.01 || target > 0;
-      if (moving) phase += 0.012 * (motion === 'ambient' ? 1 : 0.5 + 2 * energy);
+      if (moving && motion === 'ambient') {
+        boost *= 0.94;                   // lose 6% of the scroll speed every frame
+        phase += 0.005 + boost;          // slow constant drift + whatever scrolling added
+        if (lens) {
+          lens.x += (lens.tx - lens.x) * 0.15;                    // glide toward the mouse
+          lens.y += (lens.ty - lens.y) * 0.15;
+          lens.presence += (lens.target - lens.presence) * 0.08;  // fade the effect in or out
+        }
+      } else if (moving) {
+        phase += 0.012 * (0.5 + 2 * energy);
+      }
       draw();
       if (moving) {
         requestAnimationFrame(tick); // ask the browser for the next frame
@@ -319,6 +349,28 @@ a { color: var(--accent); text-underline-offset: .2em; }
     if (motion === 'ambient') {
       start();
       svg.addEventListener('waves:resume', start); // the pause button sends this when resuming
+
+      if (set.scroll !== undefined) {
+        let lastScroll = window.scrollY;
+        window.addEventListener('scroll', function () {
+          const moved = Math.abs(window.scrollY - lastScroll); // pixels scrolled since last time
+          lastScroll = window.scrollY;
+          boost = Math.min(boost + moved * 0.0004, 0.08);     // more scrolling = faster, with a speed limit
+        }, { passive: true }); // passive: promise the browser we won't block scrolling
+      }
+
+      if (lens) {
+        window.addEventListener('pointermove', function (e) {
+          // Convert screen pixels to the SVG's own coordinates (the viewBox), whatever its size on screen.
+          const point = new DOMPoint(e.clientX, e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+          if (lens.target === 0) { lens.x = point.x; lens.y = point.y; } // first move: start right under the cursor
+          lens.tx = point.x;
+          lens.ty = point.y;
+          lens.target = 1;
+        });
+        // Mouse left the window: let the lines relax back.
+        document.documentElement.addEventListener('pointerleave', function () { lens.target = 0; });
+      }
     } else {
       // Hover mode: wake up when the pointer or keyboard focus is on the trigger element.
       const trigger = set.trigger ? document.querySelector(set.trigger) : svg.parentElement;
