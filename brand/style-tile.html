@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Tile - robbefransen.be</title>
+<meta name="description" content="Visual reference for the robbefransen.be brand: colors, type, components, motif and motion.">
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="tokens.css">
+<script>
+  // Apply a saved theme choice BEFORE the page draws, so there's no flash of the wrong theme.
+  try {
+    const saved = localStorage.getItem('theme'); // "light", "dark" or null (= follow the system)
+    if (saved) document.documentElement.dataset.theme = saved;
+  } catch (e) { /* storage blocked (private mode): just follow the system */ }
+</script>
+<style>
+/* Everything below uses tokens only. This CSS is the reference for the real site's components. */
+* { box-sizing: border-box; margin: 0; }
+body {
+  background:
+    radial-gradient(60% 50% at 85% 0%, var(--color-bg-glow-1), transparent 70%),
+    radial-gradient(50% 45% at 0% 100%, var(--color-bg-glow-2), transparent 70%),
+    var(--color-bg);
+  background-attachment: fixed;
+  color: var(--color-text);
+  font: var(--weight-body) var(--text-body)/var(--leading-body) var(--font-body);
+  min-height: 100vh;
+}
+a { color: var(--color-text-accent); text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+.skip { position: absolute; left: var(--space-4); top: -4rem; z-index: 10; padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
+  background: var(--color-accent); color: var(--color-on-accent); font-weight: var(--weight-strong); }
+.skip:focus { top: var(--space-4); }
+.wrap { width: min(var(--width-content), 100% - 2 * var(--gutter)); margin-inline: auto; position: relative; z-index: 1; }
+
+/* wave field */
+.wave-field { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: var(--wave-opacity); pointer-events: none; }
+.wave-field path { fill: none; }
+
+/* glass */
+.glass { background: var(--glass-gloss), var(--color-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--color-border); border-top-color: var(--color-border-rim);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+
+/* nav */
+.nav { position: sticky; top: var(--space-3); z-index: 5; margin-top: var(--space-4); display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); border-radius: var(--radius-pill); flex-wrap: wrap; }
+.brand { display: flex; gap: var(--space-2); align-items: center; color: var(--color-text); text-decoration: none;
+  font: var(--weight-heading) 1rem var(--font-display); }
+.brand svg { color: var(--color-logo); transition: filter var(--duration-base); }
+.brand:hover svg { filter: var(--glow-mark); }
+.nav nav { display: flex; gap: var(--space-1); margin-left: auto; flex-wrap: wrap; }
+.nav nav a { color: var(--color-text-muted); text-decoration: none; padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill);
+  font-weight: var(--weight-ui); font-size: var(--text-small); min-height: 36px; display: inline-flex; align-items: center; }
+.nav nav a:hover { color: var(--color-text); background: var(--color-surface-hover); }
+.nav nav a[aria-current] { color: var(--color-on-accent); background: var(--color-accent-gradient); box-shadow: var(--glow-accent); }
+.nav-tools { display: flex; gap: var(--space-1); }
+
+/* buttons */
+.btn { font: var(--weight-strong) .95rem var(--font-body); padding: .8rem 1.4rem; border-radius: var(--radius-pill); border: 0; cursor: pointer;
+  min-height: 44px; color: var(--color-on-accent); background: var(--color-accent-gradient);
+  box-shadow: var(--inner-shine), var(--glow-accent); transition: box-shadow var(--duration-base) var(--ease-out); text-decoration: none; display: inline-flex; align-items: center; }
+.btn:hover, .btn.is-hover { box-shadow: var(--inner-shine), var(--glow-accent-hover); }
+.btn-2, .btn-sm { color: var(--color-text); background: var(--color-surface-hover); border: 1px solid var(--color-border); box-shadow: var(--inner-shine-soft); }
+.btn-sm { font: var(--weight-ui) .8rem var(--font-body); border-radius: var(--radius-pill); padding: .45rem .9rem; min-height: 34px; cursor: pointer;
+  transition: box-shadow var(--duration-base), border-color var(--duration-base); }
+.btn-2:hover, .btn-2.is-hover, .btn-sm:hover, .btn-sm.is-hover {
+  background: rgba(var(--halo-rgb), .10); border-color: rgba(var(--halo-rgb), .5); box-shadow: var(--inner-shine-mid), var(--glow-halo); }
+.is-focus { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.btn:disabled, .btn.is-disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+
+/* tags + chips */
+.tag { display: inline-block; font: var(--weight-strong) var(--text-caption)/1.4 var(--font-body); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--color-text-accent); padding: .2rem .6rem; border-radius: var(--radius-pill); background: var(--color-tag-bg); border: 1px solid var(--color-tag-border); text-decoration: none; }
+.chip { font: var(--weight-ui) var(--text-small) var(--font-body); color: var(--color-text); background: var(--color-surface-hover); border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill); padding: .4rem .9rem; min-height: 36px; cursor: pointer; transition: box-shadow var(--duration-base); }
+.chip span { color: var(--color-text-accent); margin-left: var(--space-1); font-weight: var(--weight-strong); }
+.chip:hover { border-color: rgba(var(--halo-rgb), .5); box-shadow: var(--glow-halo); }
+.chip[aria-pressed="true"] { color: var(--color-on-accent); border-color: transparent; background: var(--color-accent-gradient); box-shadow: var(--glow-accent); }
+.chip[aria-pressed="true"] span { color: var(--color-on-accent); }
+
+/* cards */
+.card { display: block; overflow: hidden; color: var(--color-text); text-decoration: none; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base); }
+.card:hover, .card.is-hover { transform: translateY(-3px); border-color: var(--color-border-accent); box-shadow: var(--shadow-card-hover); }
+.card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; background: var(--color-surface-hover); }
+.card .body { padding: var(--space-4) var(--space-5) var(--space-5); }
+.card h3 { font: var(--weight-title) var(--text-h3)/var(--leading-snug) var(--font-display); margin: var(--space-2) 0 var(--space-1); }
+.card time { color: var(--color-text-muted); font-size: var(--text-small); }
+
+/* page sections */
+.panel { padding: clamp(var(--space-5), 4vw, var(--space-7)); margin: var(--space-5) 0; }
+.kicker { font: var(--weight-strong) var(--text-caption) var(--font-body); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--color-text-accent); margin-bottom: var(--space-4); }
+.hero h1 { font: var(--weight-heading) var(--text-hero)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-heading); }
+.hero h1 em { font-style: normal; color: var(--color-heading-accent); text-shadow: var(--glow-text); }
+.hero p { color: var(--color-text-muted); margin: var(--space-4) 0 var(--space-6); max-width: 46ch; font-size: var(--text-lead); }
+.row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+.cap { display: block; font-size: var(--text-caption); color: var(--color-text-muted); margin-top: var(--space-2); text-align: center; }
+.muted { color: var(--color-text-muted); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--space-5); }
+
+/* swatches */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: var(--space-3); }
+.sw { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); font-size: var(--text-small); }
+.sw > div { height: 4.5rem; }
+.sw p { padding: var(--space-2) var(--space-3); line-height: 1.4; }
+.sw b { display: block; }
+.sw span { color: var(--color-text-muted); display: block; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-small); }
+th, td { overflow-wrap: anywhere; text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); vertical-align: top; }
+th { color: var(--color-text-muted); font-weight: var(--weight-ui); }
+.pass { color: var(--color-text); font-weight: var(--weight-strong); }
+.table-scroll { overflow-x: auto; }
+
+/* type specimens */
+.spec > * + * { margin-top: var(--space-5); }
+.spec small { display: block; font: var(--weight-body) var(--text-caption) var(--font-body); color: var(--color-text-muted); margin-top: var(--space-1); letter-spacing: 0; text-transform: none; }
+.prose { max-width: var(--width-prose); }
+.prose > * + * { margin-top: var(--space-4); }
+
+/* monogram tiles */
+.marks { display: flex; gap: var(--space-6); flex-wrap: wrap; align-items: end; }
+.mark-tile { padding: var(--space-4); border-radius: var(--radius-md); display: grid; place-items: center; }
+
+/* wave demo */
+.wave-demo { width: 100%; height: 220px; border-radius: var(--radius-md); background: var(--color-bg); border: 1px solid var(--color-border); }
+.wave-demo path { fill: none; }
+
+@media (max-width: 48rem) {
+  .nav { border-radius: var(--radius-lg); }
+  .nav nav { order: 3; width: 100%; margin-left: 0; flex-wrap: nowrap; overflow-x: auto; }
+  .nav-tools { margin-left: auto; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="rf-path" d="M18 100 V20 H46 a20 20 0 0 1 0 40 H18 M44 60 L64 100 M80 100 V20 H106 M80 58 H100"/>
+    <mask id="rf-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="130" height="130">
+      <rect width="130" height="130" fill="white"/>
+      <use href="#rf-path" fill="none" stroke="black" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <symbol id="rf" viewBox="10 12 104 96">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#rf-path" stroke-width="15" mask="url(#rf-cut)"/>
+      <use href="#rf-path" stroke-width="2.5"/>
+    </g>
+  </symbol>
+  <symbol id="rf-solid" viewBox="10 12 104 96">
+    <use href="#rf-path" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<svg class="wave-field" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"
+     data-waves data-lines="34" data-lines-small="20" data-amp="70" data-freq=".8" data-spread=".09"
+     data-depth="1.3" data-motion="ambient" data-scroll data-cursor></svg>
+
+<div class="wrap">
+  <header class="glass nav">
+    <a class="brand" href="#"><svg width="36" height="33" aria-hidden="true"><use href="#rf"/></svg>Robbe Fransen</a>
+    <nav aria-label="Categories">
+      <a href="#" aria-current="page">All</a><a href="#">Projects</a><a href="#">School</a><a href="#">Travel</a><a href="#">Repair</a><a href="#">Career</a><a href="#">Music</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="btn-sm" id="theme-toggle" type="button">Light theme</button>
+      <button class="btn-sm" data-motion-toggle aria-pressed="false" type="button">Pause waves</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="glass panel hero" aria-labelledby="hero-title">
+      <p class="kicker">Style tile · robbefransen.be · v1.0 (Oct 2026)</p>
+      <h1 id="hero-title">Warm, curious, <em>alive</em>.</h1>
+      <p>The visual reference for every page. Built only from <code>tokens.css</code> and <code>waves.js</code>: if something here looks wrong, fix the token, not the page.</p>
+      <div class="row"><a class="btn" href="#colors">Colors</a><a class="btn btn-2" href="#components">Components</a></div>
+    </section>
+
+    <!-- COLORS -->
+    <section class="glass panel" id="colors" aria-labelledby="c-title">
+      <h2 class="kicker" id="c-title">Colors</h2>
+      <div class="swatches">
+        <div class="sw"><div style="background:var(--carbon-800)"></div><p><b>Carbon Black</b><span>#1E1E1E · brand black</span></p></div>
+        <div class="sw"><div style="background:var(--carbon-900)"></div><p><b>Carbon 900</b><span>#161616 · dark page</span></p></div>
+        <div class="sw"><div style="background:var(--cream-300)"></div><p><b>Apricot Cream</b><span>#FFD9AA · text (dark)</span></p></div>
+        <div class="sw"><div style="background:var(--cream-500)"></div><p><b>Cream 500</b><span>#D4C2A8 · muted (dark)</span></p></div>
+        <div class="sw"><div style="background:var(--orange-500)"></div><p><b>Dark Orange</b><span>#FF8D00 · accent</span></p></div>
+        <div class="sw"><div style="background:var(--orange-200)"></div><p><b>Orange 200</b><span>#FFBE6B · small orange text</span></p></div>
+        <div class="sw"><div style="background:var(--ember-500)"></div><p><b>Ember</b><span>#FF5A1F · depth only, never text</span></p></div>
+        <div class="sw"><div style="background:var(--cream-100)"></div><p><b>Cream 100</b><span>#FBF3E8 · light page</span></p></div>
+        <div class="sw"><div style="background:var(--cream-800)"></div><p><b>Cream 800</b><span>#5C4F43 · muted (light)</span></p></div>
+        <div class="sw"><div style="background:var(--orange-800)"></div><p><b>Orange 800</b><span>#9A4300 · orange text (light)</span></p></div>
+      </div>
+      <div class="table-scroll" style="margin-top:var(--space-6)">
+        <table>
+          <caption class="kicker" style="text-align:left">Contrast, WCAG 2.x - dark theme ("worst" = 62% glass over densely bunched waves)</caption>
+          <thead><tr><th scope="col">Text</th><th scope="col">Page</th><th scope="col">Glass worst</th><th scope="col">Allowed for</th></tr></thead>
+          <tbody>
+            <tr><td>Apricot #FFD9AA</td><td class="pass">13.6:1</td><td class="pass">7.0:1</td><td>All text</td></tr>
+            <tr><td>Muted #D4C2A8</td><td class="pass">10.4:1</td><td class="pass">5.4:1</td><td>Secondary text (not in tags)</td></tr>
+            <tr><td>Orange 200 #FFBE6B</td><td class="pass">11.1:1</td><td class="pass">5.7:1</td><td>Links, tags (4.74:1 in pill), labels</td></tr>
+            <tr><td>Dark Orange #FF8D00</td><td class="pass">7.8:1</td><td>4.0:1</td><td>Large text only (24px+)</td></tr>
+            <tr><td>Ember #FF5A1F</td><td>5.8:1</td><td>3.0:1</td><td>Never text</td></tr>
+            <tr><td>#1E1E1E on orange gradient</td><td colspan="2" class="pass">6.0 - 9.2:1</td><td>Button text</td></tr>
+            <tr><td>White on #FF8D00</td><td colspan="2">2.3:1 - fails</td><td>Forbidden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:var(--space-4);font-size:var(--text-small)">Light theme: Carbon 14.3:1, Muted #5C4F43 6.5:1, Orange 800 5.4:1 (worst case on glass). Dark Orange as text on light: 2.1:1, forbidden.</p>
+    </section>
+
+    <!-- TYPE -->
+    <section class="glass panel" aria-labelledby="t-title">
+      <h2 class="kicker" id="t-title">Typography - Clash Display + Manrope</h2>
+      <div class="spec">
+        <div style="font:var(--weight-heading) var(--text-hero)/var(--leading-tight) var(--font-display);letter-spacing:var(--tracking-heading)">Hero - Get schwifty<small>--text-hero · Clash Display 600 · 36 → 68px · home page only</small></div>
+        <div style="font:var(--weight-heading) var(--text-h1)/var(--leading-tight) var(--font-display);letter-spacing:var(--tracking-heading)">H1 - Fixed a portal gun<small>--text-h1 · Clash Display 600 · 34 → 58px · one per page</small></div>
+        <div style="font:var(--weight-heading) var(--text-h2)/var(--leading-snug) var(--font-display)">H2 - Diagnosis<small>--text-h2 · Clash Display 600 · 24 → 32px</small></div>
+        <div style="font:var(--weight-title) var(--text-h3)/var(--leading-snug) var(--font-display)">H3 - Plumbus with a dead flux capacitor<small>--text-h3 · Clash Display 500 · 19 → 22px · card titles</small></div>
+        <div class="prose">
+          <p style="font-size:var(--text-lead)">Lead - The portal gun stopped portaling. Turned out to be a cold solder joint.<small>--text-lead · Manrope 400 · 19px</small></p>
+          <p>Body - A cold solder joint is like a loose plug: it looks connected, but the current can't get through. Running text stays under 42rem wide, about 70 characters per line, and <a href="#">links are underlined</a> so they don't rely on color alone.<small>--text-body · Manrope 400 · 17px / 1.65 · max --width-prose</small></p>
+          <p style="font-size:var(--text-small)" class="muted">Small - 5 Oct 2026 · 2 min read<small>--text-small · Manrope 400-600 · 14px</small></p>
+          <p class="kicker" style="margin:0">Caption label<small>--text-caption · Manrope 700 · uppercase · +0.12em</small></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section class="glass panel" id="components" aria-labelledby="comp-title">
+      <h2 class="kicker" id="comp-title">Components - every state</h2>
+      <div class="row">
+        <div><button class="btn" type="button">Latest posts</button><span class="cap">primary</span></div>
+        <div><button class="btn is-hover" type="button">Latest posts</button><span class="cap">hover</span></div>
+        <div><button class="btn is-focus" type="button">Latest posts</button><span class="cap">focus</span></div>
+        <div><button class="btn" type="button" disabled>Latest posts</button><span class="cap">disabled</span></div>
+      </div>
+      <div class="row" style="margin-top:var(--space-5)">
+        <div><button class="btn btn-2" type="button">About me</button><span class="cap">secondary</span></div>
+        <div><button class="btn btn-2 is-hover" type="button">About me</button><span class="cap">secondary hover</span></div>
+        <div><button class="btn btn-2 is-focus" type="button">About me</button><span class="cap">secondary focus</span></div>
+        <div><button class="btn-sm" type="button">Pause waves</button><span class="cap">small</span></div>
+        <div><button class="btn-sm is-hover" type="button">Pause waves</button><span class="cap">small hover</span></div>
+      </div>
+      <div class="row" style="margin-top:var(--space-5)">
+        <div><a class="tag" href="#">soldering</a><span class="cap">tag</span></div>
+        <div><button class="chip" aria-pressed="false" type="button">motorcycle<span>2</span></button><span class="cap">filter chip</span></div>
+        <div><button class="chip" aria-pressed="true" type="button">roadtrip<span>3</span></button><span class="cap">chip pressed</span></div>
+        <div><a href="#">Text link</a><span class="cap">link</span></div>
+      </div>
+      <div class="grid-3" style="margin-top:var(--space-6)">
+        <a class="glass card" href="#"><img src="https://picsum.photos/seed/tile1/600/400" alt=""><div class="body"><span class="tag">Repair</span><h3>Plumbus with a dead flux capacitor</h3><time datetime="2026-09-28">28 Sep 2026</time></div></a>
+        <a class="glass card is-hover" href="#"><img src="https://picsum.photos/seed/tile2/600/400" alt=""><div class="body"><span class="tag">Travel</span><h3>Gazorpazorp on two wheels (hover)</h3><time datetime="2026-09-14">14 Sep 2026 · video</time></div></a>
+        <a class="glass card" href="#"><div class="body"><span class="tag">Music</span><h3>Blips and Chitz: a 140 BPM set (no image)</h3><time datetime="2026-08-30">30 Aug 2026</time></div></a>
+      </div>
+    </section>
+
+    <!-- LOGO -->
+    <section class="glass panel" aria-labelledby="l-title">
+      <h2 class="kicker" id="l-title">Monogram - see logo-rules.md</h2>
+      <div class="marks">
+        <figure><div class="mark-tile" style="color:var(--orange-500);background:var(--carbon-900)"><svg width="110" height="102" aria-hidden="true"><use href="#rf"/></svg></div><figcaption class="cap">orange (default)</figcaption></figure>
+        <figure><div class="mark-tile" style="color:var(--cream-300);background:var(--carbon-900)"><svg width="110" height="102" aria-hidden="true"><use href="#rf"/></svg></div><figcaption class="cap">cream</figcaption></figure>
+        <figure><div class="mark-tile" style="color:var(--carbon-800);background:var(--cream-100)"><svg width="110" height="102" aria-hidden="true"><use href="#rf"/></svg></div><figcaption class="cap">carbon on light</figcaption></figure>
+        <figure><div class="mark-tile" style="color:var(--carbon-800);background:var(--orange-500)"><svg width="110" height="102" aria-hidden="true"><use href="#rf"/></svg></div><figcaption class="cap">carbon on orange</figcaption></figure>
+        <figure><div class="mark-tile" style="color:var(--orange-500);background:var(--carbon-900)"><svg width="43" height="40" aria-hidden="true"><use href="#rf"/></svg></div><figcaption class="cap">40px minimum</figcaption></figure>
+        <figure><div class="mark-tile" style="color:var(--orange-500);background:var(--carbon-900)"><svg width="32" height="30" aria-hidden="true"><use href="#rf-solid"/></svg></div><figcaption class="cap">solid &lt; 40px</figcaption></figure>
+        <figure><div class="mark-tile" style="background:var(--carbon-900)"><img src="logo/favicon-32.png" width="32" height="32" alt=""></div><figcaption class="cap">favicon 32</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- MOTION -->
+    <section class="glass panel" aria-labelledby="m-title">
+      <h2 class="kicker" id="m-title">Motif and motion</h2>
+      <p class="prose muted">The page background is the real wave field: slow drift, faster while you scroll, lines bend gently around the mouse. The demo below is a small "hover" variant for reference: point at it.</p>
+      <svg class="wave-demo" style="margin-top:var(--space-4)" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true"
+           data-waves data-lines="14" data-amp="34" data-freq="1.1" data-spread=".14" data-depth="1.2" data-motion="hover"></svg>
+      <div class="table-scroll" style="margin-top:var(--space-5)">
+      <table>
+        <thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Use</th></tr></thead>
+        <tbody>
+          <tr><td>--duration-fast</td><td>150ms</td><td>color changes</td></tr>
+          <tr><td>--duration-base</td><td>250ms</td><td>hover lifts and glows</td></tr>
+          <tr><td>--duration-slow</td><td>400ms</td><td>panels appearing</td></tr>
+          <tr><td>--ease-out</td><td>cubic-bezier(.2,.7,.2,1)</td><td>everything</td></tr>
+          <tr><td colspan="3" class="muted">Reduce motion → all durations 1ms, waves static. Reduce transparency → solid glass.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="waves.js"></script>
+<script>
+// Theme toggle: switch between dark and light, remember the choice, and tell the waves to recolor.
+const toggle = document.getElementById('theme-toggle');
+function currentTheme() {
+  // an explicit choice wins; otherwise ask the operating system
+  return document.documentElement.dataset.theme ||
+    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+}
+function updateLabel() {
+  toggle.textContent = currentTheme() === 'dark' ? 'Light theme' : 'Dark theme'; // button says where it will take you
+}
+toggle.addEventListener('click', function () {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;            // tokens.css reacts to data-theme
+  try { localStorage.setItem('theme', next); } catch (e) {}  // remember for next visit (if allowed)
+  document.dispatchEvent(new Event('themechange'));          // waves.js repaints its lines
+  updateLabel();
+});
+updateLabel();
+</script>
+</body>
+</html>

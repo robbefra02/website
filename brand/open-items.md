@@ -20,6 +20,12 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Cursor effect toned down (round 3.1): gentle bend, not a lens/zoom.
 - YouTube embeds use a click-to-load thumbnail (youtube-nocookie), so YouTube only loads after a visitor clicks (GDPR-friendly).
 
+- Body font: Manrope (OFL), self-hosted. Clash Display stays the display font.
+- Light theme exists as a secondary theme (tokens + toggle). Dark is default.
+- Brand deliverables done (Oct 2026): tokens.css, waves.js, brand-guide.md, logo-rules.md + logo files, style-tile.html, CLAUDE.md.
+
 ## Still open
+- **Clash Display + public repo.** The ITF license forbids distributing the font files through a public repository, so `ClashDisplay-*` is gitignored. Until fixed, the live site shows the fallback font for headings. Fix: make the repo private (needs GitHub Pro: free with the GitHub Student Developer Pack), then commit the font. Alternative: Fontshare API (sends visitor IPs to ITF, GDPR note needed).
+- **Deploy workflow.** `.github/workflows/static.yml` uploads the repo without running Jekyll. Coding session 1 switches it to a Jekyll build.
 - Sync: start with "ask Claude to sync" (Notion connector), later a GitHub Action (needs NOTION_TOKEN + NOTION_DATABASE_ID secrets).
-- Clash Display font files: download from fontshare.com and place in `/brand/fonts/` (the build container can't reach Fontshare).
+- Light theme: built and contrast-checked, but not yet reviewed by Robbe.
