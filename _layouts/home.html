@@ -1,0 +1,24 @@
+---
+layout: base
+---
+{%- comment -%}
+  The home page of a language (/nl/). The page itself (nl/index.html) only holds the hero text;
+  this layout puts it next to the "right now" panel and adds the newest posts below.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign posts = site.posts | where: "lang", lang -%}
+
+<div class="home-top">
+  <section class="glass panel hero" aria-labelledby="hero-title">
+    {{ content }}
+  </section>
+  {% include now.html %}
+</div>
+
+<section class="latest" aria-labelledby="latest-title">
+  <h2 class="section-title" id="latest-title">{{ t.latest_posts }}</h2>
+  {%- comment -%} The 12 newest posts in this language {%- endcomment %}
+  {% assign newest = posts | slice: 0, 12 %}
+  {% include post-feed.html posts=newest %}
+</section>

@@ -135,7 +135,7 @@ A stack of thin flowing lines, cream at the back → orange → ember at the fro
 | Scrolling | Speed up and swell slightly, then ease back by themselves | `data-scroll` |
 | Mouse | Lines bend gently away from the pointer, glide back when it leaves | `data-cursor` |
 | Phones (< 700px wide) | 20 lines instead of 34, no cursor effect | `data-lines-small="20"` |
-| Pause button pressed | Everything freezes | `data-motion-toggle` on the button |
+| Pause button pressed | Everything freezes; the choice is remembered on the next page | `data-motion-toggle` on the button (labels from `data-label-pause` / `data-label-play`) |
 | OS "reduce motion" on | Static waves, no scroll or cursor effect | automatic |
 | OS "reduce transparency" on | Glass becomes solid | automatic (tokens.css) |
 

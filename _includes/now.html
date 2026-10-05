@@ -1,0 +1,15 @@
+{%- comment -%}
+  The "right now" panel. The lines come from _data/now.yml (one list per language).
+  A <dl> (description list) is the HTML element for label + value pairs.
+{%- endcomment -%}
+<aside class="glass panel now" aria-labelledby="now-title">
+  <h2 class="kicker" id="now-title">{{ t.now_title }}</h2>
+  <dl>
+    {%- for item in site.data.now[lang] %}
+    <div>
+      <dt>{{ item.label }}</dt>
+      <dd>{{ item.value }}</dd>
+    </div>
+    {%- endfor %}
+  </dl>
+</aside>

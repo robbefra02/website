@@ -1,0 +1,29 @@
+---
+layout: base
+---
+{%- comment -%}
+  A single post. Posts get this layout automatically (see "defaults" in _config.yml).
+  Basic version: title, date, tags, cover and text. Coding session 5 adds the video player,
+  "more in this category" and links between language versions.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+<article class="glass panel post">
+  <a class="back-link" href="/{{ lang }}/{{ page.category }}/"><span aria-hidden="true">←</span> {{ t.back_to }} {{ t.categories[page.category] }}</a>
+  <h1 class="page-title">{{ page.title }}</h1>
+  <p class="post-meta">
+    {% include date.html date=page.date %}
+    {%- for tag in page.tags %}
+    <span class="tag">{{ tag }}</span>
+    {%- endfor %}
+  </p>
+  {%- if page.summary %}
+  <p class="lead">{{ page.summary }}</p>
+  {%- endif %}
+  {%- if page.cover and page.cover != "" %}
+  <img class="post-cover" src="{{ page.cover }}" alt="" width="1200" height="800">
+  {%- endif %}
+  <div class="prose">
+    {{ content }}
+  </div>
+</article>

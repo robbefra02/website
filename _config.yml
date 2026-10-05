@@ -31,3 +31,14 @@ exclude:
   - brand/logo-rules.md
   - brand/open-items.md
   - brand/fonts/README.md
+
+# Default settings for every post (posts live in nl/_posts/, en/_posts/, fr/_posts/).
+# Address: /:categories/:title/  ->  /nl/repair/portal-gun-fix/
+#   "nl" comes from the folder, "repair" from `category:` in the post, the last part from `slug:`.
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /:categories/:title/

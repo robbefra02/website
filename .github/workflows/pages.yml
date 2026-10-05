@@ -5,6 +5,9 @@
 # - On a push to main: build AND publish to robbefransen.be.
 #
 # You never run this yourself; GitHub runs it. Watch it under the repo's "Actions" tab.
+#
+# The "uses: actions/...@vX" lines are ready-made building blocks from GitHub. Keep them on versions
+# that run on Node 24 (Node 20 is retired). A yellow "Node.js 20 is deprecated" warning = time to bump.
 name: Build and deploy site
 
 on:
@@ -30,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Clash Display may not sit in a public repo (license), so it's stored as an encrypted
       # repo secret and written into the site here, only for the build. See brand/fonts/README.md.
@@ -47,7 +50,7 @@ jobs:
           fi
 
       - name: Set up GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       # Turns layouts, includes and Markdown into plain HTML in the _site folder
       - name: Build with Jekyll
@@ -57,7 +60,7 @@ jobs:
           destination: ./_site
 
       - name: Package the built site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
 
   deploy:
     # Only publish from main, never from a pull request

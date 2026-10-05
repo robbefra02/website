@@ -1,0 +1,24 @@
+# The "Nu bezig met" panel on the home page: what you're up to right now.
+# Keep it short (3-5 lines) and update it whenever you like.
+# label = left column, value = right column. One list per language.
+# PLACEHOLDER: replace these Rick and Morty lines with your own.
+
+nl:
+  - label: "Studeren"
+    value: "Media en Creatieve Technologie (KDG)"
+  - label: "Bouwen"
+    value: "Een portfolio aan video's en content"
+  - label: "Luisteren"
+    value: "Joji & Oliver Tree"
+  - label: "Volgende reis"
+    value: "Nog vast te leggen.."
+
+en:
+  - label: "Studying"
+    value: "Media and Creatieve Technologies (KDG)"
+  - label: "Building"
+    value: "A portfolio in videos and content"
+  - label: "Listening"
+    value: "Joji & Oliver Tree"
+  - label: "Next trip"
+    value: "To be denoted.."

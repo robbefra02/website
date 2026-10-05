@@ -1,0 +1,20 @@
+{%- comment -%}
+  Bottom of every page. Contact links always sit here, in the same place on every page (WCAG 3.2.6).
+  Links come from _data/links.yml.
+{%- endcomment -%}
+<footer class="site-footer glass">
+  <div class="footer-brand">
+    <svg width="28" height="26" aria-hidden="true" focusable="false"><use href="#rf"/></svg>
+    <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
+  </div>
+
+  <nav class="footer-links" aria-label="{{ t.footer_contact }}">
+    <ul>
+      {%- for link in site.data.links %}
+      <li><a href="{{ link.url }}" rel="me">{{ link.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+
+  <a class="footer-top" href="#main">{{ t.footer_top }} <span aria-hidden="true">↑</span></a>
+</footer>

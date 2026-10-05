@@ -1,0 +1,13 @@
+{%- comment -%}
+  A grid of post cards, newest first. Shows a short message when there are no posts yet.
+  Use: {% include post-feed.html posts=some_posts %}
+{%- endcomment -%}
+{%- if include.posts.size > 0 %}
+<ul class="feed">
+  {%- for post in include.posts %}
+  <li>{% include post-card.html post=post %}</li>
+  {%- endfor %}
+</ul>
+{%- else %}
+<p class="empty-note">{{ t.no_posts_yet }}</p>
+{%- endif %}

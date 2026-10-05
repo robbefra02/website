@@ -4,14 +4,46 @@
 
 nl:
   skip: "Ga naar de inhoud"
-  home: "Home"
+  home: "Alles"
   site_nav: "Hoofdmenu"
   theme_to_light: "Licht thema"
   theme_to_dark: "Donker thema"
+  waves_pause: "Golven pauzeren"
+  waves_play: "Golven afspelen"
+  footer_contact: "Contact"
+  footer_top: "Naar boven"
+  no_posts_yet: "Hier is niks te zien.. Nog niet!"
+  latest_posts: "Laatste berichten"
+  now_title: "Nu bezig met"
+  back_to: "Terug naar"
+  months: [jan, feb, mrt, apr, mei, jun, jul, aug, sep, okt, nov, dec]
+  categories:
+    projects: "Projecten"
+    school: "School"
+    travel: "Reizen"
+    repair: "Herstellingen"
+    career: "Carrière"
+    music: "Muziek"
 
 en:
   skip: "Skip to content"
-  home: "Home"
+  home: "All"
   site_nav: "Main menu"
   theme_to_light: "Light theme"
   theme_to_dark: "Dark theme"
+  waves_pause: "Pause waves"
+  waves_play: "Play waves"
+  footer_contact: "Contact"
+  footer_top: "Back to top"
+  no_posts_yet: "Nothing to see here... Yet!"
+  latest_posts: "Latest posts"
+  now_title: "Right now"
+  back_to: "Back to"
+  months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  categories:
+    projects: "Projects"
+    school: "School"
+    travel: "Travel"
+    repair: "Repair"
+    career: "Career"
+    music: "Music"

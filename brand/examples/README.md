@@ -18,9 +18,8 @@
 ## Where files will live once the Jekyll site exists
 
 ```
-_posts/
-  nl/2026-10-05-portal-gun-nokia-charger.md
-  en/2026-10-05-portal-gun-nokia-charger.md
+nl/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /nl/repair/portal-gun-nokia-charger/
+en/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /en/repair/portal-gun-nokia-charger/
 assets/posts/portal-gun-nokia-charger/
   01.jpg
 nl/

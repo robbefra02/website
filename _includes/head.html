@@ -7,8 +7,10 @@
 
 {%- comment -%} Title: "Page title - Robbe Fransen", or just the site name on the home page {%- endcomment -%}
 <title>{% if page.title and page.title != site.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-{%- if page.description %}
-<meta name="description" content="{{ page.description }}">
+{%- comment -%} Description for search engines: a page's description, or a post's summary {%- endcomment -%}
+{%- assign description = page.description | default: page.summary -%}
+{%- if description %}
+<meta name="description" content="{{ description | escape }}">
 {%- endif %}
 
 {%- comment -%} While the new site is being built: ask search engines not to index it yet (see prelaunch in _config.yml) {%- endcomment -%}

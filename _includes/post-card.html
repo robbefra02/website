@@ -1,0 +1,18 @@
+{%- comment -%}
+  One post as a glass card: cover image (if any), category tag, title, date.
+  The whole card is one link. Use: {% include post-card.html post=post %}
+  The image has alt="" on purpose: the title right below already says what the post is about.
+{%- endcomment -%}
+{%- assign post = include.post -%}
+<a class="card glass" href="{{ post.url }}">
+  {%- comment -%} Only when there is a cover: an empty cover: "" still counts as "something" in Liquid {%- endcomment -%}
+  {%- if post.cover and post.cover != "" %}
+  <img src="{{ post.cover }}" alt="" width="600" height="400" loading="lazy">
+  {%- endif %}
+  <div class="card-body">
+    {%- comment -%} Title first in the code, so screen readers say it first. CSS shows the tag above it. {%- endcomment %}
+    <h3>{{ post.title }}</h3>
+    <span class="tag">{{ t.categories[post.category] }}</span>
+    {% include date.html date=post.date %}
+  </div>
+</a>
