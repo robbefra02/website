@@ -24,6 +24,15 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Light theme exists as a secondary theme (tokens + toggle). Dark is default.
 - Brand deliverables done (Oct 2026): tokens.css, waves.js, brand-guide.md, logo-rules.md + logo files, style-tile.html, CLAUDE.md.
 
+## To do (Robbe)
+- [ ] **GitHub Student Developer Pack** (unlocks GitHub Pro for free, needed for the Clash Display fix below)
+  - [x] Delete the old separate school GitHub account (done, frees up the school email)
+  - [ ] Add the KdG school email to the primary GitHub account (Settings → Emails) and verify it
+  - [ ] Apply at education.github.com/pack with that email + proof of enrollment (student card or enrollment certificate). Approval can take a few days.
+  - [ ] Once GitHub Pro is active: make the repo private (Settings → General → Danger Zone), then check Settings → Pages still shows the site as live
+  - [ ] Then (coding session): remove the `ClashDisplay-*` line from `.gitignore` and commit the font
+  - ⚠️ Order matters: making the repo private **before** Pro is active takes the live site offline.
+
 ## Still open
 - **Clash Display + public repo.** The ITF license forbids distributing the font files through a public repository, so `ClashDisplay-*` is gitignored. Until fixed, the live site shows the fallback font for headings. Fix: make the repo private (needs GitHub Pro: free with the GitHub Student Developer Pack), then commit the font. Alternative: Fontshare API (sends visitor IPs to ITF, GDPR note needed).
 - **Deploy workflow.** `.github/workflows/static.yml` uploads the repo without running Jekyll. Coding session 1 switches it to a Jekyll build.
