@@ -5,20 +5,20 @@
 
 nl:
   - label: "Studeren"
-    value: "Plumbus-design, jaar 2"
+    value: "Media en Creatieve Technologie (KDG)"
   - label: "Bouwen"
-    value: "Portal gun v0.3"
+    value: "Een portfolio aan video's en content"
   - label: "Luisteren"
-    value: "Blips and Chitz OST"
+    value: "Joji & Oliver Tree"
   - label: "Volgende reis"
-    value: "Bird Planet"
+    value: "Nog vast te leggen.."
 
 en:
   - label: "Studying"
-    value: "Plumbus Design, year 2"
+    value: "Media and Creatieve Technologies (KDG)"
   - label: "Building"
-    value: "Portal gun v0.3"
+    value: "A portfolio in videos and content"
   - label: "Listening"
-    value: "Blips and Chitz OST"
+    value: "Joji & Oliver Tree"
   - label: "Next trip"
-    value: "Bird Planet"
+    value: "To be denoted.."
