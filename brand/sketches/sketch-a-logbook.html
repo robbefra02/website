@@ -338,7 +338,7 @@ a:hover { text-decoration-thickness: 2px; }
     // The cursor "lens". x/y = where it is drawn, tx/ty = where the mouse really is.
     // We move x/y a little toward tx/ty every frame, so the effect glides instead of jumping.
     const lens = set.cursor !== undefined && motion === 'ambient'
-      ? { x: 0, y: 0, tx: 0, ty: 0, presence: 0, target: 0, radius: box.height * 0.16, strength: box.height * 0.1 }
+      ? { x: 0, y: 0, tx: 0, ty: 0, presence: 0, target: 0, radius: box.height * 0.12, strength: box.height * 0.035 }
       : null;
 
     function draw() {
@@ -360,9 +360,9 @@ a:hover { text-decoration-thickness: 2px; }
         boost *= 0.94;                   // lose 6% of the scroll speed every frame
         phase += 0.005 + boost;          // slow constant drift + whatever scrolling added
         if (lens) {
-          lens.x += (lens.tx - lens.x) * 0.15;                    // glide toward the mouse
-          lens.y += (lens.ty - lens.y) * 0.15;
-          lens.presence += (lens.target - lens.presence) * 0.08;  // fade the effect in or out
+          lens.x += (lens.tx - lens.x) * 0.08;                    // glide toward the mouse
+          lens.y += (lens.ty - lens.y) * 0.08;
+          lens.presence += (lens.target - lens.presence) * 0.05;  // fade the effect in or out
         }
       } else if (moving) {
         phase += 0.012 * (0.5 + 2 * energy);

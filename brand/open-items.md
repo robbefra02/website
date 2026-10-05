@@ -15,8 +15,11 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Post model: one Category per post (= menu item, max 6-7), free Subtags (= filter buttons on the category page, generated from the posts). Same slug across languages links translations.
 - Notion: page "🌐 website" under Robbe, with a Posts database (Title, Status, Date, Category, Subtags, Language, Slug, Summary, Cover, Featured, Live URL) and one example post. ✏️ callouts = private notes, not published.
 
+- Categories confirmed: Projects, School, Travel, Repair, Career, Music.
+- Sync publishes straight to the live site: setting "Ready to publish" in Notion is the approval. No PR per post.
+- Cursor effect toned down (round 3.1): gentle bend, not a lens/zoom.
+- YouTube embeds use a click-to-load thumbnail (youtube-nocookie), so YouTube only loads after a visitor clicks (GDPR-friendly).
+
 ## Still open
 - Sync: start with "ask Claude to sync" (Notion connector), later a GitHub Action (needs NOTION_TOKEN + NOTION_DATABASE_ID secrets).
-- Does the sync publish straight to main, or open a PR per post? (Recommendation: straight to main - setting "Ready to publish" is the approval.)
-- Final category list (currently Projects, School, Travel, Repair, Career, Music).
 - Clash Display font files: download from fontshare.com and place in `/brand/fonts/` (the build container can't reach Fontshare).
