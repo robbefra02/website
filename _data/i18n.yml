@@ -1,0 +1,17 @@
+# Interface text per language: buttons, links, labels. NOT post content (that comes from Notion).
+# Use in a template like this:  {{ t.skip }}   (the layout sets `t` to the current language)
+# Adding a language = copy the whole `nl:` block, rename it (en, fr) and translate the values.
+
+nl:
+  skip: "Ga naar de inhoud"
+  home: "Home"
+  site_nav: "Hoofdmenu"
+  theme_to_light: "Licht thema"
+  theme_to_dark: "Donker thema"
+
+en:
+  skip: "Skip to content"
+  home: "Home"
+  site_nav: "Main menu"
+  theme_to_light: "Light theme"
+  theme_to_dark: "Dark theme"

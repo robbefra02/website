@@ -1,0 +1,73 @@
+# Builds the site with Jekyll and publishes it to GitHub Pages.
+#
+# - On a pull request: only BUILD, as a check. A broken template shows a red X on the PR
+#   instead of breaking the live site.
+# - On a push to main: build AND publish to robbefransen.be.
+#
+# You never run this yourself; GitHub runs it. Watch it under the repo's "Actions" tab.
+name: Build and deploy site
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  # Adds a "Run workflow" button in the Actions tab, to redeploy by hand
+  workflow_dispatch:
+
+# What this workflow is allowed to do with the repo and with GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time. A newer push waits instead of cancelling a deploy halfway.
+concurrency:
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      # Clash Display may not sit in a public repo (license), so it's stored as an encrypted
+      # repo secret and written into the site here, only for the build. See brand/fonts/README.md.
+      # No secret yet? Then this step skips and headings use the fallback font.
+      - name: Add the Clash Display font from the secret
+        env:
+          FONT_BASE64: ${{ secrets.CLASH_DISPLAY_WOFF2_BASE64 }}
+        run: |
+          if [ -n "$FONT_BASE64" ]; then
+            echo "$FONT_BASE64" | base64 --decode > brand/fonts/ClashDisplay-Variable.woff2
+            echo "Font added."
+          else
+            echo "No CLASH_DISPLAY_WOFF2_BASE64 secret found: headings will use the fallback font."
+          fi
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v5
+
+      # Turns layouts, includes and Markdown into plain HTML in the _site folder
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Package the built site
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    # Only publish from main, never from a pull request
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

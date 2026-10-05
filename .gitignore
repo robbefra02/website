@@ -1,0 +1,3 @@
+# Clash Display (ITF Free Font License) may not be redistributed through a public repository.
+# The deploy workflow adds the font from a repo secret instead (see brand/fonts/README.md).
+brand/fonts/ClashDisplay-*

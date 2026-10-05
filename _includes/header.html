@@ -1,0 +1,15 @@
+{%- comment -%}
+  Top bar, sticky. Session 1: monogram + name + theme toggle.
+  Session 2 adds the category menu and the "Pause waves" button.
+{%- endcomment -%}
+<header class="site-header glass">
+  <a class="brand" href="/{{ lang }}/">
+    <svg width="36" height="33" aria-hidden="true" focusable="false"><use href="#rf"/></svg>
+    <span>{{ site.title }}</span>
+  </a>
+  <div class="header-tools">
+    {%- comment -%} The button's text is filled in by theme.js; these labels are the text in each language {%- endcomment %}
+    <button class="btn-sm" type="button" id="theme-toggle" hidden
+            data-label-light="{{ t.theme_to_light }}" data-label-dark="{{ t.theme_to_dark }}">{{ t.theme_to_light }}</button>
+  </div>
+</header>

@@ -1,0 +1,232 @@
+/* ==========================================================================
+   SITE.CSS - the site's own styles
+   ==========================================================================
+   Rule: only var(--...) tokens from /brand/tokens.css, no raw colors or sizes.
+   Reference for how things should look: /brand/style-tile.html
+
+   Sections:
+   1. Reset and base
+   2. Layout
+   3. Glass
+   4. Header
+   5. Buttons
+   6. Text content
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. RESET AND BASE
+   -------------------------------------------------------------------------- */
+
+/* Width and height include padding and border: makes sizes predictable */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Browsers add margins to headings, paragraphs etc. We set our own spacing instead. */
+body, h1, h2, h3, h4, p, figure, blockquote, ul, ol { margin: 0; }
+
+html {
+  /* Smooth scrolling for "#" links, but only if the visitor doesn't mind motion */
+  scroll-padding-top: var(--header-offset); /* jumped-to content lands below the sticky header (WCAG 2.4.11) */
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  font: var(--weight-body) var(--text-body)/var(--leading-body) var(--font-body);
+  /* Two soft light pools on top of the page color give the background depth */
+  background:
+    radial-gradient(60% 50% at 85% 0%, var(--color-bg-glow-1), transparent 70%),
+    radial-gradient(50% 45% at 0% 100%, var(--color-bg-glow-2), transparent 70%),
+    var(--color-bg);
+  background-attachment: fixed; /* the light pools stay put while you scroll */
+}
+
+img, svg, video { max-width: 100%; display: block; }
+
+a { color: var(--color-text-accent); text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: var(--link-hover-thickness); }
+
+/* Keyboard focus: always visible (WCAG 2.4.7). :focus-visible = only for keyboard, not mouse clicks. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* "Skip to content" link: hidden above the screen until you press Tab (WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -5rem;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: var(--weight-strong);
+  text-decoration: none;
+}
+.skip-link:focus { top: var(--space-4); }
+
+
+/* --------------------------------------------------------------------------
+   2. LAYOUT
+   -------------------------------------------------------------------------- */
+
+/* Centered column with a minimum gap left and right on phones */
+.wrap {
+  width: min(var(--width-content), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  position: relative;
+  z-index: 1; /* above the wave field (added in session 2) */
+}
+
+main { padding-block: var(--space-6) var(--space-9); }
+
+/* Vertical rhythm between big blocks on a page */
+main > * + * { margin-top: var(--space-5); }
+
+
+/* --------------------------------------------------------------------------
+   3. GLASS - the frosted panel used for all content
+   -------------------------------------------------------------------------- */
+.glass {
+  background: var(--glass-gloss), var(--color-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)); /* Safari */
+  border: var(--border-width) solid var(--color-border);
+  border-top-color: var(--color-border-rim); /* light catching the top edge */
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* A glass block with comfortable padding that grows with the screen */
+.panel { padding: clamp(var(--space-5), 4vw, var(--space-7)); }
+
+
+/* --------------------------------------------------------------------------
+   4. HEADER - sticky glass pill at the top
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: var(--space-3);
+  z-index: 10;
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  color: var(--color-text);
+  text-decoration: none;
+  font: var(--weight-heading) var(--text-brand) var(--font-display);
+}
+.brand svg { color: var(--color-logo); transition: filter var(--duration-base) var(--ease-out); }
+.brand:hover svg { filter: var(--glow-mark); }
+
+.header-tools { display: flex; gap: var(--space-1); margin-left: auto; }
+
+/* On narrow screens the pill becomes a rounded rectangle so wrapped items still fit.
+   48rem is written out because CSS can't use var() inside a media query. */
+@media (max-width: 48rem) {
+  .site-header { border-radius: var(--radius-lg); }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. BUTTONS
+   .btn    = primary, orange (one per view)
+   .btn-2  = secondary, glass (add to .btn)
+   .btn-sm = small glass button (header tools)
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--pad-btn);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font: var(--weight-strong) var(--text-button) var(--font-body);
+  color: var(--color-on-accent);
+  background: var(--color-accent-gradient);
+  box-shadow: var(--inner-shine), var(--glow-accent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+.btn:hover { box-shadow: var(--inner-shine), var(--glow-accent-hover); }
+
+.btn-2,
+.btn-sm {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--inner-shine-soft);
+}
+
+.btn-sm {
+  min-height: var(--target-sm);
+  padding: var(--pad-btn-sm);
+  border-radius: var(--radius-pill);
+  font: var(--weight-ui) var(--text-button-sm) var(--font-body);
+  cursor: pointer;
+  transition: box-shadow var(--duration-base), border-color var(--duration-base);
+}
+
+/* Secondary hover: the glow sits mostly inside, with a tight halo outside */
+.btn-2:hover,
+.btn-sm:hover {
+  background: rgba(var(--halo-rgb), .10);
+  border-color: rgba(var(--halo-rgb), .5);
+  box-shadow: var(--inner-shine-mid), var(--glow-halo);
+}
+
+/* The "hidden" attribute must win over display: inline-flex above */
+[hidden] { display: none !important; }
+
+
+/* --------------------------------------------------------------------------
+   6. TEXT CONTENT
+   -------------------------------------------------------------------------- */
+h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading); text-wrap: balance; }
+
+.hero h1 {
+  font-size: var(--text-hero);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-heading);
+}
+/* One highlighted word in the hero heading: <em>signaal</em> */
+.hero h1 em { font-style: normal; color: var(--color-heading-accent); text-shadow: var(--glow-text); }
+
+.lead {
+  max-width: 46ch;
+  margin-top: var(--space-4);
+  font-size: var(--text-lead);
+  color: var(--color-text-muted);
+}
+
+/* Small uppercase label above a section */
+.kicker {
+  margin-bottom: var(--space-4);
+  font: var(--weight-strong) var(--text-caption) var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-accent);
+}
+
+/* Running text: limited line length for comfortable reading */
+.prose { max-width: var(--width-prose); }
+.prose > * + * { margin-top: var(--space-4); }
+.prose h2 { font-size: var(--text-h2); line-height: var(--leading-snug); margin-top: var(--space-7); }
+.prose > :first-child { margin-top: 0; } /* no extra gap above the first heading in a block */

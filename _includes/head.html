@@ -1,0 +1,41 @@
+{%- comment -%}
+  Everything inside <head>: page title, description, icons, styles.
+  Used by _layouts/base.html. `lang` and `t` are set by the layout.
+{%- endcomment -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{%- comment -%} Title: "Page title - Robbe Fransen", or just the site name on the home page {%- endcomment -%}
+<title>{% if page.title and page.title != site.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+{%- if page.description %}
+<meta name="description" content="{{ page.description }}">
+{%- endif %}
+
+{%- comment -%} While the new site is being built: ask search engines not to index it yet (see prelaunch in _config.yml) {%- endcomment -%}
+{%- if site.prelaunch %}
+<meta name="robots" content="noindex">
+{%- endif %}
+
+{%- comment -%} Language versions of this page. More hreflang lines get added when EN and FR exist. {%- endcomment %}
+<link rel="alternate" hreflang="{{ lang }}" href="{{ page.url | absolute_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">
+
+{%- comment -%} Icons: see brand/logo-rules.md {%- endcomment %}
+<link rel="icon" href="/brand/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/brand/logo/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/brand/logo/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/brand/logo/apple-touch-icon.png">
+
+{%- comment -%} Styles: tokens first (all the values), then the site's own CSS (which uses those values) {%- endcomment %}
+<link rel="preload" href="/brand/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/brand/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<script>
+  // Runs before the page is drawn: apply a saved theme choice now, so the page doesn't
+  // flash dark first and then jump to light. (The toggle itself lives in /assets/js/theme.js.)
+  try {
+    const saved = localStorage.getItem('theme'); // "light", "dark", or null = follow the system setting
+    if (saved) document.documentElement.dataset.theme = saved;
+  } catch (e) { /* storage blocked (private window): just follow the system setting */ }
+</script>

@@ -1,0 +1,33 @@
+# Site settings for Jekyll. GitHub reads this file when it builds the site.
+# After changing it, the next build picks it up (no restart needed, GitHub builds fresh every time).
+
+title: Robbe Fransen
+url: "https://www.robbefransen.be"
+baseurl: ""                 # the site lives at the root of the domain, not in a subfolder
+timezone: Europe/Brussels   # post dates are read in Belgian time
+
+# The language used when a page doesn't say otherwise. Every page sets its own `lang`.
+lang: nl
+languages: [nl]             # add en and fr here when those versions go live
+
+# true = the new pages tell search engines "don't index me yet" (meta robots noindex).
+# Set to false on launch day, when /nl/ replaces the old site.
+prelaunch: true
+
+# GitHub Pages adds its default theme ("Primer") unless told not to. We use our own design.
+theme: null
+
+markdown: kramdown
+kramdown:
+  input: GFM                # GitHub-flavored Markdown: the same syntax as on GitHub and close to Notion's export
+
+# Files and folders Jekyll should NOT turn into pages.
+# The brand docs are for us, not for visitors; brand/examples even contains Liquid tags that would break the build.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - brand/examples/
+  - brand/brand-guide.md
+  - brand/logo-rules.md
+  - brand/open-items.md
+  - brand/fonts/README.md

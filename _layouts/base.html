@@ -1,0 +1,25 @@
+{%- comment -%}
+  The frame around every page: <head>, skip link, header, the page's own content, scripts.
+  A page uses it with `layout: base` in its front matter.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+{% include head.html %}
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ t.skip }}</a>
+  {% include icons.html %}
+
+  <div class="wrap">
+    {% include header.html %}
+    <main id="main">
+      {{ content }}
+    </main>
+  </div>
+
+  <script src="/assets/js/theme.js"></script>
+</body>
+</html>
