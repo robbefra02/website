@@ -37,8 +37,15 @@ Things that are decided "later". Read this at the start of every brand or site s
 ## Done
 - Coding session 1 (foundation): Jekyll deploy workflow, base layout, header with theme toggle, `/nl/` placeholder page.
 - Coding session 2: category menu, wave field with pause button (remembered between pages), footer with contact links, 6 placeholder category pages, workflow on Node 24 actions.
+- Coding session 3: home page (hero, "right now" panel from `_data/now.yml`, newest posts), post cards, basic post page, dates per language, 5 placeholder posts in `nl/_posts/`.
+
+## Launch checklist (when /nl/ replaces the old site)
+- [ ] Delete all posts with `placeholder: true` (`nl/_posts/`)
+- [ ] Replace the "right now" lines in `_data/now.yml` and the category intros still marked Placeholder
+- [ ] `prelaunch: false` in `_config.yml`
+- [ ] Point the root `/` to `/nl/` and remove the old pages
 
 ## Still open
 - Sync: start with "ask Claude to sync" (Notion connector), later a GitHub Action (needs NOTION_TOKEN + NOTION_DATABASE_ID secrets).
 - Light theme: built and contrast-checked, but not yet reviewed by Robbe.
-- Footer links (`_data/links.yml`) were copied from the old site: confirm Instagram, YouTube, LinkedIn are the ones to show.
+- Footer links: confirmed by Robbe (Instagram, YouTube; LinkedIn removed).

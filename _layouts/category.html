@@ -3,7 +3,6 @@ layout: base
 ---
 {%- comment -%}
   A category page (e.g. /nl/repair/). Front matter of the page sets: lang, category, title, intro.
-  Session 4 adds the post list and the subtag filter buttons here.
   (Variables from other layouts don't carry over, so `t` is set again here.)
 {%- endcomment -%}
 {%- assign lang = page.lang | default: site.lang -%}
@@ -13,6 +12,15 @@ layout: base
   {%- if page.intro %}
   <p class="lead">{{ page.intro }}</p>
   {%- endif %}
-  <p class="empty-note">{{ t.no_posts_yet }}</p>
+</section>
+
+{%- comment -%}
+  The posts in this category and language, newest first.
+  Coding session 4 turns this into a compact list with subtag filter buttons.
+{%- endcomment %}
+{% assign category_posts = site.posts | where: "lang", lang | where: "category", page.category %}
+<section class="latest" aria-labelledby="latest-title">
+  <h2 class="section-title" id="latest-title">{{ t.latest_posts }}</h2>
+  {% include post-feed.html posts=category_posts %}
 </section>
 {{ content }}

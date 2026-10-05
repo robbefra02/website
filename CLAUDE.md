@@ -17,9 +17,12 @@ Robbe Fransen's personal site: a **personal log** (projects, school, travel, rep
 - Deploy: `.github/workflows/pages.yml` builds with Jekyll (`actions/jekyll-build-pages`). On a pull request it only builds (a red check = broken build); on `main` it also publishes. GitHub's default theme is switched off (`theme: null` in `_config.yml`).
 - Site structure:
   - `_layouts/base.html` - frame of every page (wave field, header, footer, scripts). `waves: false` in a page's front matter turns the waves off.
+  - `_layouts/home.html` - a language's home page: hero (text from `nl/index.html`), "right now" panel, newest posts
   - `_layouts/category.html` - category pages (`/nl/<category>/`)
-  - `_includes/` - head, icons (SVG sprite), header (menu + theme and pause buttons), footer
-  - `_data/i18n.yml` - interface text per language; `_data/categories.yml` - menu order; `_data/links.yml` - footer contact links
+  - `_layouts/post.html` - a single post (given to every post automatically)
+  - Note: a page's own text is rendered before its layout, so `t` (interface text) only exists inside layouts and includes, not in the page itself.
+  - `_includes/` - head, icons (SVG sprite), header (menu + theme and pause buttons), footer, post-card, post-feed, now ("right now" panel), date (dates per language)
+  - `_data/i18n.yml` - interface text per language (incl. month names); `_data/categories.yml` - menu order; `_data/links.yml` - footer contact links; `_data/now.yml` - "right now" panel
   - `assets/css/site.css`, `assets/js/theme.js` (theme toggle), `assets/js/nav.js` (centers the active menu item on phones)
   - Pages per language in `/nl/`, `/en/`, `/fr/`.
 
@@ -57,14 +60,15 @@ Robbe Fransen's personal site: a **personal log** (projects, school, travel, rep
 
 Posts are written in Notion (Robbe → 🌐 website → Posts database) and synced into the repo.
 
-- Post files: `_posts/<lang>/YYYY-MM-DD-<slug>.md` with front matter: `title, date, lang, slug, category, tags, summary, cover, featured, notion_id`. Example: `/brand/examples/`.
+- Post files: `<lang>/_posts/YYYY-MM-DD-<slug>.md` (so `nl/_posts/...`) with front matter: `title, date, lang, slug, category, tags, summary, cover, featured, notion_id`. Example: `/brand/examples/`. The folder gives the language in the address: `/nl/<category>/<slug>/` (see `defaults` in `_config.yml`). Don't use `_posts/nl/`: Jekyll then drops the language from the address.
+- Posts with `placeholder: true` are fake Rick and Morty posts for testing the design. Delete them before launch.
 - Images: `assets/posts/<slug>/01.jpg, 02.jpg...` (download them - Notion links expire after about an hour).
 - **Categories** (menu items, exactly one per post): projects, school, travel, repair, career, music. Adding one is a deliberate site change.
 - **Subtags** (`tags`): free, lowercase-with-dashes. Category pages show filter chips built from the tags their posts use.
 - Same `slug` across languages = translations of each other (link them with `hreflang`).
 - YouTube: use the click-to-load include (`youtube-nocookie.com`, thumbnail first). Never a plain iframe.
 - Notion callouts with the ✏️ icon are private notes: skip them.
-- **Sync publishing:** status "Ready to publish" in Notion is the owner's approval. Sync commits that only touch `_posts/` and `assets/posts/` may go straight to `main`, then set the Notion status to "Published" and fill "Live URL". This is the only exception to the git rule below.
+- **Sync publishing:** status "Ready to publish" in Notion is the owner's approval. Sync commits that only touch `<lang>/_posts/` and `assets/posts/` may go straight to `main`, then set the Notion status to "Published" and fill "Live URL". This is the only exception to the git rule below.
 
 ## Multilingual
 

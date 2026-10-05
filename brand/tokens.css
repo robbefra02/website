@@ -186,6 +186,7 @@
   /* --- Layout --- */
   --width-content: 72rem;   /* max width of the page */
   --width-prose: 42rem;     /* max width of running text (~70 characters per line) */
+  --card-min: 18rem;        /* narrowest a post card may get; the feed fits as many columns as possible */
   --gutter: 1rem;           /* minimum space left and right on phones */
   --header-offset: 9rem;    /* sticky header height (2 rows on tablets) + gap: anchors and focus land below it */
 

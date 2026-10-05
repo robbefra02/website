@@ -1,0 +1,24 @@
+# The "Nu bezig met" panel on the home page: what you're up to right now.
+# Keep it short (3-5 lines) and update it whenever you like.
+# label = left column, value = right column. One list per language.
+# PLACEHOLDER: replace these Rick and Morty lines with your own.
+
+nl:
+  - label: "Studeren"
+    value: "Plumbus-design, jaar 2"
+  - label: "Bouwen"
+    value: "Portal gun v0.3"
+  - label: "Luisteren"
+    value: "Blips and Chitz OST"
+  - label: "Volgende reis"
+    value: "Bird Planet"
+
+en:
+  - label: "Studying"
+    value: "Plumbus Design, year 2"
+  - label: "Building"
+    value: "Portal gun v0.3"
+  - label: "Listening"
+    value: "Blips and Chitz OST"
+  - label: "Next trip"
+    value: "Bird Planet"

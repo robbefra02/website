@@ -13,6 +13,10 @@ nl:
   footer_contact: "Contact"
   footer_top: "Naar boven"
   no_posts_yet: "Hier is niks te zien.. Nog niet!"
+  latest_posts: "Laatste berichten"
+  now_title: "Nu bezig met"
+  back_to: "Terug naar"
+  months: [jan, feb, mrt, apr, mei, jun, jul, aug, sep, okt, nov, dec]
   categories:
     projects: "Projecten"
     school: "School"
@@ -32,6 +36,10 @@ en:
   footer_contact: "Contact"
   footer_top: "Back to top"
   no_posts_yet: "Nothing to see here... Yet!"
+  latest_posts: "Latest posts"
+  now_title: "Right now"
+  back_to: "Back to"
+  months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
   categories:
     projects: "Projects"
     school: "School"

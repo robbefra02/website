@@ -1,0 +1,8 @@
+{%- comment -%}
+  Shows a date the way each language writes it: "5 okt 2026" / "5 Oct 2026".
+  Jekyll only knows English month names, so we look the month up in _data/i18n.yml.
+  Use: {% include date.html date=post.date %}
+  <time datetime="..."> gives computers (and screen readers) the exact date.
+{%- endcomment -%}
+{%- assign month_index = include.date | date: "%-m" | minus: 1 -%}
+<time datetime="{{ include.date | date: '%Y-%m-%d' }}">{{ include.date | date: "%-d" }} {{ t.months[month_index] }} {{ include.date | date: "%Y" }}</time>

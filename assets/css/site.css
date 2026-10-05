@@ -13,6 +13,9 @@
    6. Text content
    7. Wave field
    8. Footer
+   9. Home page (hero + "right now")
+   10. Post cards and feed
+   11. Post page
    ========================================================================== */
 
 
@@ -185,7 +188,10 @@ main > * + * { margin-top: var(--space-5); }
 /* The section you're in (e.g. reading a Repair post): orange underline */
 .site-nav a[aria-current="true"] {
   color: var(--color-text);
-  box-shadow: inset 0 calc(-1 * var(--indicator-width)) 0 var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: var(--indicator-width);
+  text-underline-offset: var(--space-2);
 }
 
 /* --- Tool buttons (theme, pause): icon + text --- */
@@ -393,3 +399,148 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading
 }
 
 .footer-top { margin-left: auto; color: var(--color-text-muted); }
+
+
+/* --------------------------------------------------------------------------
+   9. HOME PAGE - hero and "right now" panel side by side on wide screens
+   -------------------------------------------------------------------------- */
+.home-top {
+  display: grid;
+  gap: var(--space-5);
+}
+/* 56rem: from here there's room for two panels side by side (media queries can't use var()) */
+@media (min-width: 56rem) {
+  .home-top { grid-template-columns: 1.4fr 1fr; align-items: stretch; }
+}
+
+/* "Right now": label left, value right, a thin line between rows */
+.now dl { margin: 0; }
+.now dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.now dt { font-weight: var(--weight-ui); }
+.now dd { margin: 0; color: var(--color-text-muted); text-align: right; }
+
+/* Heading above the post feed, sitting on the page (not on glass) */
+.section-title {
+  margin-block: var(--space-7) var(--space-4);
+  font-size: var(--text-h2);
+  line-height: var(--leading-snug);
+}
+
+
+/* --------------------------------------------------------------------------
+   10. POST CARDS AND FEED
+   A grid that fits as many card columns as the screen allows, newest first,
+   reading left to right like a normal list.
+   -------------------------------------------------------------------------- */
+.feed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--card-min), 100%), 1fr)); /* min(): never wider than a small phone */
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: start;
+}
+
+.card {
+  display: block;
+  overflow: hidden; /* keeps the cover image inside the rounded corners */
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base);
+}
+.card:hover {
+  transform: translateY(calc(-1 * var(--space-1)));
+  border-color: var(--color-border-accent);
+  box-shadow: var(--shadow-card-hover);
+}
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;  /* every cover gets the same shape, whatever the photo size */
+  object-fit: cover;    /* fill that shape and crop the edges instead of squashing */
+  background: var(--color-surface-hover);
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+.card-body .tag { order: -1; } /* shown above the title, even though it comes after it in the HTML */
+.card h3 {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-title);
+  line-height: var(--leading-snug);
+}
+.card time { font-size: var(--text-small); color: var(--color-text-muted); }
+
+/* Small pill with the category or a subtag */
+.tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-width) solid var(--color-tag-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-tag-bg);
+  color: var(--color-text-accent);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-strong);
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+
+/* --------------------------------------------------------------------------
+   11. POST PAGE (basic version; coding session 5 adds more)
+   -------------------------------------------------------------------------- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--target-sm);
+  font-size: var(--text-small);
+  font-weight: var(--weight-ui);
+  text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+.post .page-title { margin-top: var(--space-3); }
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+}
+
+.post-cover {
+  width: 100%;
+  height: auto;
+  margin-block: var(--space-6);
+  border-radius: var(--radius-md);
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.post .prose { margin-top: var(--space-6); }
+.post-cover + .prose { margin-top: 0; }
+
+/* Quotes and lists inside posts */
+.prose ul { padding-left: var(--space-5); }
+.prose blockquote {
+  padding-left: var(--space-4);
+  border-left: var(--indicator-width) solid var(--color-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+}
