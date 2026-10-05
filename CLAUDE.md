@@ -14,7 +14,8 @@ Robbe Fransen's personal site: a **personal log** (projects, school, travel, rep
 - **Jekyll, as run by GitHub Pages** - for layouts, includes and Markdown posts. Only plugins on the GitHub Pages whitelist. Nothing to install locally: GitHub builds it.
 - **No npm, no bundlers, no build tools, no `package.json`** in the site. (Tooling like the Notion sync may run in a GitHub Action, but it never adds a build step to the site itself.)
 - No external CDNs for fonts, CSS or JS. Everything self-hosted.
-- Deploy: `.github/workflows/static.yml` currently uploads the repo as-is **without running Jekyll**. Session 1 must replace it with a Jekyll build (`actions/jekyll-build-pages`) before any Jekyll features work.
+- Deploy: `.github/workflows/pages.yml` builds with Jekyll (`actions/jekyll-build-pages`). On a pull request it only builds (a red check = broken build); on `main` it also publishes. GitHub's default theme is switched off (`theme: null` in `_config.yml`).
+- Site structure: `_layouts/base.html` (frame of every page), `_includes/` (head, icons, header), `_data/i18n.yml` (interface text per language), `assets/css/site.css`, `assets/js/`. Pages per language in `/nl/`, `/en/`, `/fr/`.
 
 ## Design rules
 
@@ -76,7 +77,7 @@ Posts are written in Notion (Robbe → 🌐 website → Posts database) and sync
 ## Fonts and licensing
 
 - Manrope (OFL) is committed in `/brand/fonts/`.
-- **Clash Display (ITF Free Font License) is gitignored**: the license forbids distributing the files through a public repository. Until the repo is private (GitHub Pro via the Student Developer Pack), the live site falls back to the next font in `--font-display`. Don't commit `ClashDisplay-*` files while the repo is public. Never subset or convert the font files (license forbids modifying them).
+- **Clash Display (ITF Free Font License) is gitignored**: the license forbids distributing the files through a public repository. The deploy workflow writes it into `brand/fonts/` from the `CLASH_DISPLAY_WOFF2_BASE64` repo secret during the build (see `brand/fonts/README.md`). Don't commit `ClashDisplay-*` files while the repo is public. Never subset or convert the font files (license forbids modifying them).
 
 ## Accessibility - WCAG 2.2 AA (target for every PR)
 

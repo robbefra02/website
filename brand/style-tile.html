@@ -49,7 +49,7 @@ a:hover { text-decoration-thickness: 2px; }
 .nav { position: sticky; top: var(--space-3); z-index: 5; margin-top: var(--space-4); display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); border-radius: var(--radius-pill); flex-wrap: wrap; }
 .brand { display: flex; gap: var(--space-2); align-items: center; color: var(--color-text); text-decoration: none;
-  font: var(--weight-heading) 1rem var(--font-display); }
+  font: var(--weight-heading) var(--text-brand) var(--font-display); }
 .brand svg { color: var(--color-logo); transition: filter var(--duration-base); }
 .brand:hover svg { filter: var(--glow-mark); }
 .nav nav { display: flex; gap: var(--space-1); margin-left: auto; flex-wrap: wrap; }
@@ -60,12 +60,12 @@ a:hover { text-decoration-thickness: 2px; }
 .nav-tools { display: flex; gap: var(--space-1); }
 
 /* buttons */
-.btn { font: var(--weight-strong) .95rem var(--font-body); padding: .8rem 1.4rem; border-radius: var(--radius-pill); border: 0; cursor: pointer;
-  min-height: 44px; color: var(--color-on-accent); background: var(--color-accent-gradient);
+.btn { font: var(--weight-strong) var(--text-button) var(--font-body); padding: var(--pad-btn); border-radius: var(--radius-pill); border: 0; cursor: pointer;
+  min-height: var(--target-min); color: var(--color-on-accent); background: var(--color-accent-gradient);
   box-shadow: var(--inner-shine), var(--glow-accent); transition: box-shadow var(--duration-base) var(--ease-out); text-decoration: none; display: inline-flex; align-items: center; }
 .btn:hover, .btn.is-hover { box-shadow: var(--inner-shine), var(--glow-accent-hover); }
 .btn-2, .btn-sm { color: var(--color-text); background: var(--color-surface-hover); border: 1px solid var(--color-border); box-shadow: var(--inner-shine-soft); }
-.btn-sm { font: var(--weight-ui) .8rem var(--font-body); border-radius: var(--radius-pill); padding: .45rem .9rem; min-height: 34px; cursor: pointer;
+.btn-sm { font: var(--weight-ui) var(--text-button-sm) var(--font-body); border-radius: var(--radius-pill); padding: var(--pad-btn-sm); min-height: var(--target-sm); cursor: pointer;
   transition: box-shadow var(--duration-base), border-color var(--duration-base); }
 .btn-2:hover, .btn-2.is-hover, .btn-sm:hover, .btn-sm.is-hover {
   background: rgba(var(--halo-rgb), .10); border-color: rgba(var(--halo-rgb), .5); box-shadow: var(--inner-shine-mid), var(--glow-halo); }
@@ -76,7 +76,7 @@ a:hover { text-decoration-thickness: 2px; }
 .tag { display: inline-block; font: var(--weight-strong) var(--text-caption)/1.4 var(--font-body); letter-spacing: .08em; text-transform: uppercase;
   color: var(--color-text-accent); padding: .2rem .6rem; border-radius: var(--radius-pill); background: var(--color-tag-bg); border: 1px solid var(--color-tag-border); text-decoration: none; }
 .chip { font: var(--weight-ui) var(--text-small) var(--font-body); color: var(--color-text); background: var(--color-surface-hover); border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill); padding: .4rem .9rem; min-height: 36px; cursor: pointer; transition: box-shadow var(--duration-base); }
+  border-radius: var(--radius-pill); padding: var(--pad-btn-sm); min-height: var(--target-sm); cursor: pointer; transition: box-shadow var(--duration-base); }
 .chip span { color: var(--color-text-accent); margin-left: var(--space-1); font-weight: var(--weight-strong); }
 .chip:hover { border-color: rgba(var(--halo-rgb), .5); box-shadow: var(--glow-halo); }
 .chip[aria-pressed="true"] { color: var(--color-on-accent); border-color: transparent; background: var(--color-accent-gradient); box-shadow: var(--glow-accent); }

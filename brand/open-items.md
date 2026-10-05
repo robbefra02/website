@@ -25,7 +25,8 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Brand deliverables done (Oct 2026): tokens.css, waves.js, brand-guide.md, logo-rules.md + logo files, style-tile.html, CLAUDE.md.
 
 ## To do (Robbe)
-- [ ] **GitHub Student Developer Pack** (unlocks GitHub Pro for free, needed for the Clash Display fix below)
+- [ ] **Add the Clash Display font as a GitHub secret** (`CLASH_DISPLAY_WOFF2_BASE64`), steps in `brand/fonts/README.md`. Until then, headings use the fallback font on the live site.
+- [ ] **GitHub Student Developer Pack** (free GitHub Pro). No longer needed for the font (the secret solves that), still worth having: private repo option and other student perks.
   - [x] Delete the old separate school GitHub account (done, frees up the school email)
   - [ ] Add the KdG school email to the primary GitHub account (Settings → Emails) and verify it
   - [ ] Apply at education.github.com/pack with that email + proof of enrollment (student card or enrollment certificate). Approval can take a few days.
@@ -33,8 +34,10 @@ Things that are decided "later". Read this at the start of every brand or site s
   - [ ] Then (coding session): remove the `ClashDisplay-*` line from `.gitignore` and commit the font
   - ⚠️ Order matters: making the repo private **before** Pro is active takes the live site offline.
 
+## Done
+- Coding session 1 (foundation): Jekyll deploy workflow, base layout, header with theme toggle, `/nl/` placeholder page.
+
 ## Still open
-- **Clash Display + public repo.** The ITF license forbids distributing the font files through a public repository, so `ClashDisplay-*` is gitignored. Until fixed, the live site shows the fallback font for headings. Fix: make the repo private (needs GitHub Pro: free with the GitHub Student Developer Pack), then commit the font. Alternative: Fontshare API (sends visitor IPs to ITF, GDPR note needed).
-- **Deploy workflow.** `.github/workflows/static.yml` uploads the repo without running Jekyll. Coding session 1 switches it to a Jekyll build.
+- **Clash Display + public repo:** solved in coding session 1. The font stays out of git; the deploy workflow writes it from a repo secret during the build. Needs the one-time secret setup above.
 - Sync: start with "ask Claude to sync" (Notion connector), later a GitHub Action (needs NOTION_TOKEN + NOTION_DATABASE_ID secrets).
 - Light theme: built and contrast-checked, but not yet reviewed by Robbe.

@@ -128,6 +128,10 @@
   --color-focus: var(--cream-300);                  /* keyboard focus ring */
   --color-logo: var(--orange-500);                   /* monogram color (see logo-rules.md) */
   --halo-rgb: 255, 217, 170;                        /* glow color of secondary buttons, as "R, G, B" so we can add opacity */
+  --focus-width: 2px;                               /* keyboard focus ring thickness */
+  --focus-offset: 3px;                              /* gap between element and focus ring */
+  --border-width: 1px;                              /* glass edges, buttons, tags */
+  --link-hover-thickness: 2px;                      /* underline gets bolder on hover */
 
   /* --- Color: the wave motif (read by waves.js through data- attributes, listed here as the reference) --- */
   --wave-from: var(--cream-300);                    /* back lines */
@@ -148,6 +152,9 @@
   --text-body: 1.0625rem;                               /* 17px: normal text */
   --text-small: .875rem;                                /* meta, dates */
   --text-caption: .78rem;                               /* captions, labels, tags */
+  --text-button: .95rem;                                /* text on normal buttons */
+  --text-button-sm: .8rem;                              /* text on small buttons (header tools) */
+  --text-brand: 1rem;                                   /* "Robbe Fransen" next to the monogram */
 
   /* --- Typography: weights --- */
   --weight-body: 400;
@@ -178,6 +185,13 @@
   --width-content: 72rem;   /* max width of the page */
   --width-prose: 42rem;     /* max width of running text (~70 characters per line) */
   --gutter: 1rem;           /* minimum space left and right on phones */
+  --header-offset: 6rem;    /* height of the sticky header + gap: anchors and focus land below it */
+
+  /* --- Click/tap targets (WCAG 2.5.8 asks for 24px minimum; we aim higher) --- */
+  --target-min: 44px;       /* buttons, nav links */
+  --target-sm: 36px;        /* small tool buttons, chips */
+  --pad-btn: .8rem 1.4rem;      /* inside normal buttons (vertical horizontal) */
+  --pad-btn-sm: .45rem .9rem;   /* inside small buttons and chips */
 
   /* --- Shape --- */
   --radius-sm: 6px;         /* small chips, language switch */
