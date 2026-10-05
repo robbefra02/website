@@ -238,6 +238,8 @@ a:hover { text-decoration-thickness: 2px; }
 // data-freq    how many bumps across the width      (default 1)
 // data-spread  how much each line differs from the next (default 0.15)
 // data-from / data-to  colors of the first and last line (gradient across the stack)
+// data-via     optional middle color, for a 3-color gradient (from -> via -> to)
+// data-depth   optional: back lines get thin, front lines get thicker (fake 3D depth). Value = extra width of the front line
 // data-motion  "ambient" = always moving slowly, "hover" = only moves while you point at it, "none" = static
 // data-trigger CSS selector of the element that wakes a "hover" wave (default: the svg's parent)
 // data-seed    any text; gives this wave its own unique shape (used for per-post waveforms)
@@ -269,6 +271,15 @@ a:hover { text-decoration-thickness: 2px; }
     return 'rgb(' + channels.join(',') + ')';
   }
 
+  // Pick the color for one line. amount 0 = first line, 1 = last line.
+  function lineColor(set, amount) {
+    const from = set.from || '#FFD9AA';
+    const to = set.to || '#FF8D00';
+    if (!set.via) return mix(from, to, amount); // only two colors: blend straight across
+    // three colors: first half blends from -> via, second half via -> to
+    return amount < 0.5 ? mix(from, set.via, amount * 2) : mix(set.via, to, (amount - 0.5) * 2);
+  }
+
   // Build the drawing instructions ("d" attribute) for one wavy line.
   function wavePath(w, baseY, amp, freq, phase, offset) {
     let d = '';
@@ -297,7 +308,11 @@ a:hover { text-decoration-thickness: 2px; }
     const paths = [];
     for (let i = 0; i < lines; i++) {
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('stroke', mix(set.from || '#FFD9AA', set.to || '#FF8D00', i / Math.max(lines - 1, 1)));
+      const amount = i / Math.max(lines - 1, 1); // where this line sits in the stack, 0 to 1
+      p.setAttribute('stroke', lineColor(set, amount));
+      if (set.depth) {
+        p.setAttribute('stroke-width', (0.5 + amount * Number(set.depth)).toFixed(2)); // thin at the back, thick at the front
+      }
       svg.appendChild(p);
       paths.push(p);
     }
