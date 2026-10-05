@@ -12,7 +12,7 @@ nl:
   waves_play: "Golven afspelen"
   footer_contact: "Contact"
   footer_top: "Naar boven"
-  no_posts_yet: "Hier verschijnen binnenkort de eerste berichten."
+  no_posts_yet: "Hier is niks te zien.. Nog niet!"
   categories:
     projects: "Projecten"
     school: "School"
@@ -31,7 +31,7 @@ en:
   waves_play: "Play waves"
   footer_contact: "Contact"
   footer_top: "Back to top"
-  no_posts_yet: "The first posts will show up here soon."
+  no_posts_yet: "Nothing to see here... Yet!"
   categories:
     projects: "Projects"
     school: "School"
