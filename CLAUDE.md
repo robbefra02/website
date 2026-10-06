@@ -21,9 +21,9 @@ Robbe Fransen's personal site: a **personal log** (projects, school, travel, aud
   - `_layouts/category.html` - category pages (`/nl/<category>/`)
   - `_layouts/post.html` - a single post (given to every post automatically)
   - Note: a page's own text is rendered before its layout, so `t` (interface text) only exists inside layouts and includes, not in the page itself.
-  - `_includes/` - head, icons (SVG sprite), header (menu + theme and pause buttons), footer, post-card, post-feed, now ("right now" panel), date (dates per language)
+  - `_includes/` - head, icons (SVG sprite), header (menu + theme and pause buttons), footer, post-card (home), post-row (category list), post-feed, now ("right now" panel), date (dates per language), video (click-to-load YouTube), figure (image with caption)
   - `_data/i18n.yml` - interface text per language (incl. month names); `_data/categories.yml` - menu order; `_data/links.yml` - footer contact links; `_data/now.yml` - "right now" panel
-  - `assets/css/site.css`, `assets/js/theme.js` (theme toggle), `assets/js/nav.js` (centers the active menu item on phones)
+  - `assets/css/site.css`, `assets/js/theme.js` (theme toggle), `assets/js/nav.js` (centers the active menu item on phones), `assets/js/filter.js` (subtag filter on category pages, also reads `#subtag` from the address), `assets/js/video.js` (loads YouTube only after a click)
   - Pages per language in `/nl/`, `/en/`, `/fr/`.
 
 ## Design rules
@@ -67,7 +67,8 @@ Posts are written in Notion (Robbe → 🌐 website → Posts database) and sync
   Notion Category option → site key: Projects → `projects`, School → `school`, Travel → `travel`, Audio/Video/Foto → `media`, Career → `career`, Music → `music`.
 - **Subtags** (`tags`): free, lowercase-with-dashes. Category pages show filter chips built from the tags their posts use.
 - Same `slug` across languages = translations of each other (link them with `hreflang`).
-- YouTube: use the click-to-load include (`youtube-nocookie.com`, thumbnail first). Never a plain iframe.
+- YouTube: `{% include video.html youtube="<id>" caption="..." %}` (optional `poster="/assets/posts/<slug>/video.jpg"`). Nothing loads from YouTube before the click. Never a plain iframe, and no `i.ytimg.com` thumbnails (that also contacts Google).
+- Images with a caption: `{% include figure.html src="/assets/posts/<slug>/01.jpg" alt="..." caption="..." %}`. The Notion caption becomes both alt and caption.
 - Notion callouts with the ✏️ icon are private notes: skip them.
 - **Sync publishing:** status "Ready to publish" in Notion is the owner's approval. Sync commits that only touch `<lang>/_posts/` and `assets/posts/` may go straight to `main`, then set the Notion status to "Published" and fill "Live URL". This is the only exception to the git rule below.
 

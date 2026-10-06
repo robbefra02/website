@@ -1,0 +1,20 @@
+{%- comment -%}
+  One post as a compact row (used on category pages): small image, title, date and subtags.
+  No cover? Then a faint monogram fills the image spot, so all rows line up.
+  Use: {% include post-row.html post=post %}
+{%- endcomment -%}
+{%- assign post = include.post -%}
+<a class="post-row" href="{{ post.url }}">
+  {%- if post.cover and post.cover != "" %}
+  <img src="{{ post.cover }}" alt="" width="300" height="200" loading="lazy">
+  {%- else %}
+  <span class="thumb-empty" aria-hidden="true"><svg width="36" height="33" focusable="false"><use href="#rf"/></svg></span>
+  {%- endif %}
+  <div>
+    <h3>{{ post.title }}</h3>
+    <p class="post-row-meta">
+      {% include date.html date=post.date %}
+      {%- for tag in post.tags %} <span>#{{ tag }}</span>{% endfor %}
+    </p>
+  </div>
+</a>

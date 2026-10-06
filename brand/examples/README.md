@@ -9,9 +9,9 @@
 |---|---|
 | Fields (Title, Date, Category, Subtags, Language, Slug, Summary, Cover, Featured) | Front matter at the top of the file |
 | Text, headings, lists, quotes | Normal Markdown |
-| Image (uploaded) | Downloaded to `/assets/posts/<slug>/01.jpg, 02.jpg...` (Notion image links expire after ~1 hour) |
+| Image (uploaded) | Downloaded to `/assets/posts/<slug>/01.jpg, 02.jpg...` (Notion image links expire after ~1 hour), written as `{% include figure.html src=... alt=... caption=... %}` |
 | Image caption | Alt text (for screen readers) and visible caption |
-| YouTube video block or YouTube link on its own line | `{% include video.html youtube="..." %}` - a privacy-friendly embed (youtube-nocookie) |
+| YouTube video block or YouTube link on its own line | `{% include video.html youtube="..." caption="..." %}` - nothing loads from YouTube until the visitor clicks play (youtube-nocookie) |
 | Uploaded video file (small) | Downloaded to `/assets/posts/<slug>/` and shown with a `<video>` player |
 | Callout with the ✏️ icon | **Skipped** - private notes to yourself, never published |
 

@@ -38,6 +38,9 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Coding session 1 (foundation): Jekyll deploy workflow, base layout, header with theme toggle, `/nl/` placeholder page.
 - Coding session 2: category menu, wave field with pause button (remembered between pages), footer with contact links, 6 placeholder category pages, workflow on Node 24 actions.
 - Coding session 3: home page (hero, "right now" panel from `_data/now.yml`, newest posts), post cards, basic post page, dates per language, 5 placeholder posts in `nl/_posts/`.
+- Herstellingen replaced by Audio/Video/Foto (key `media`), on the site and in Notion.
+- Coding session 4: category pages as a list with subtag filter buttons (filter.js, shareable as /nl/travel/#motorcycle).
+- Coding session 5: full post page: reading time, clickable subtags, image captions (figure include), click-to-load YouTube (video include), "Meer in ...", hreflang between language versions.
 
 ## Launch checklist (when /nl/ replaces the old site)
 - [ ] Delete all posts with `placeholder: true` (`nl/_posts/`)
