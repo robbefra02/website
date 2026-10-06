@@ -187,6 +187,10 @@
   --width-content: 72rem;   /* max width of the page */
   --width-prose: 42rem;     /* max width of running text (~70 characters per line) */
   --card-min: 18rem;        /* narrowest a post card may get; the feed fits as many columns as possible */
+  --thumb-width: 7rem;      /* small image in a post row on category pages */
+  --thumb-width-sm: 4.5rem; /* same, on narrow phones */
+  --play-size: 4.5rem;      /* round play button on videos */
+  --play-icon: 1.75rem;     /* the triangle inside it */
   --gutter: 1rem;           /* minimum space left and right on phones */
   --header-offset: 9rem;    /* sticky header height (2 rows on tablets) + gap: anchors and focus land below it */
 

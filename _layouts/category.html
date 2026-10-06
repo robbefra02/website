@@ -2,25 +2,61 @@
 layout: base
 ---
 {%- comment -%}
-  A category page (e.g. /nl/repair/). Front matter of the page sets: lang, category, title, intro.
+  A category page (e.g. /nl/media/). Front matter of the page sets: lang, category, title, intro.
+  Shows the posts of this category as a list, with filter buttons for the subtags those posts use.
   (Variables from other layouts don't carry over, so `t` is set again here.)
 {%- endcomment -%}
 {%- assign lang = page.lang | default: site.lang -%}
 {%- assign t = site.data.i18n[lang] -%}
+{%- assign category_posts = site.posts | where: "lang", lang | where: "category", page.category -%}
+
 <section class="glass panel" aria-labelledby="page-title">
-  <h1 id="page-title" class="page-title">{{ t.categories[page.category] }}</h1>
+  {%- comment -%} <wbr> after each "/" = "you may break the line here", so "Audio/Video/Foto" fits on a phone {%- endcomment %}
+  <h1 id="page-title" class="page-title">{{ t.categories[page.category] | replace: "/", "/<wbr>" }}</h1>
   {%- if page.intro %}
   <p class="lead">{{ page.intro }}</p>
   {%- endif %}
+  {%- if category_posts.size == 0 %}
+  <p class="empty-note">{{ t.no_posts_yet }}</p>
+  {%- endif %}
 </section>
 
-{%- comment -%}
-  The posts in this category and language, newest first.
-  Coding session 4 turns this into a compact list with subtag filter buttons.
-{%- endcomment %}
-{% assign category_posts = site.posts | where: "lang", lang | where: "category", page.category %}
-<section class="latest" aria-labelledby="latest-title">
-  <h2 class="section-title" id="latest-title">{{ t.latest_posts }}</h2>
-  {% include post-feed.html posts=category_posts %}
+{%- if category_posts.size > 0 %}
+<section class="glass panel" aria-labelledby="list-title">
+  <h2 class="kicker" id="list-title">{{ t.all_posts }}</h2>
+
+  {%- comment -%}
+    Collect every subtag used by these posts, once each, in alphabetical order.
+    concat = glue lists together, uniq = drop doubles, sort = A to Z.
+  {%- endcomment -%}
+  {%- assign all_tags = "" | split: "" -%}
+  {%- for post in category_posts -%}
+    {%- assign all_tags = all_tags | concat: post.tags -%}
+  {%- endfor -%}
+  {%- assign tag_list = all_tags | uniq | sort %}
+
+  {%- if tag_list.size > 0 %}
+  {%- comment -%} Hidden until filter.js shows it: without JavaScript the buttons wouldn't do anything {%- endcomment %}
+  <div class="chips" role="group" aria-label="{{ t.filter_label }}" data-filter-group hidden>
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">{{ t.filter_all }}<span>{{ category_posts.size }}</span></button>
+    {%- for tag in tag_list %}
+    {%- assign tag_count = category_posts | where_exp: "post", "post.tags contains tag" | size %}
+    <button class="chip" type="button" data-filter="{{ tag }}" aria-pressed="false">{{ tag }}<span>{{ tag_count }}</span></button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- comment -%} aria-live: screen readers announce the new number after filtering {%- endcomment %}
+  <p class="post-count" aria-live="polite" data-post-count data-one="{{ t.post_count_one }}" data-many="{{ t.post_count_many }}">
+    {%- if category_posts.size == 1 %}{{ t.post_count_one }}{% else %}{{ t.post_count_many | replace: "%n", category_posts.size }}{% endif -%}
+  </p>
+
+  <ul class="post-list">
+    {%- for post in category_posts %}
+    <li data-tags="{{ post.tags | join: ' ' }}">{% include post-row.html post=post %}</li>
+    {%- endfor %}
+  </ul>
 </section>
+<script src="/assets/js/filter.js"></script>
+{%- endif %}
 {{ content }}

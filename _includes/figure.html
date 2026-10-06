@@ -1,0 +1,11 @@
+{%- comment -%}
+  An image with a visible caption. Use in a post:
+    {% include figure.html src="/assets/posts/<slug>/01.jpg" alt="What's in the photo" caption="Shown under the photo" %}
+  No alt given? The caption is used (Notion's image caption becomes both).
+{%- endcomment -%}
+<figure class="post-figure">
+  <img src="{{ include.src }}" alt="{{ include.alt | default: include.caption | escape }}" loading="lazy">
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>

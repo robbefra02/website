@@ -17,11 +17,22 @@ nl:
   now_title: "Nu bezig met"
   back_to: "Terug naar"
   months: [jan, feb, mrt, apr, mei, jun, jul, aug, sep, okt, nov, dec]
+  all_posts: "Alle berichten"
+  filter_label: "Filter op onderwerp"
+  filter_all: "Alles"
+  post_count_one: "1 bericht"
+  post_count_many: "%n berichten"   # %n is replaced by the number
+  reading_time: "min leestijd"
+  more_in: "Meer in"
+  also_in: "Lees ook in het"
+  lang_names: { nl: "Nederlands", en: "Engels", fr: "Frans" }
+  video_play: "Video afspelen"
+  video_note: "laadt via YouTube"
   categories:
     projects: "Projecten"
     school: "School"
     travel: "Reizen"
-    repair: "Herstellingen"
+    media: "Audio/Video/Foto"
     career: "Carrière"
     music: "Muziek"
 
@@ -40,10 +51,21 @@ en:
   now_title: "Right now"
   back_to: "Back to"
   months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  all_posts: "All posts"
+  filter_label: "Filter by topic"
+  filter_all: "All"
+  post_count_one: "1 post"
+  post_count_many: "%n posts"
+  reading_time: "min read"
+  more_in: "More in"
+  also_in: "Also read in"
+  lang_names: { nl: "Dutch", en: "English", fr: "French" }
+  video_play: "Play video"
+  video_note: "loads from YouTube"
   categories:
     projects: "Projects"
     school: "School"
     travel: "Travel"
-    repair: "Repair"
+    media: "Audio/Video/Photo"
     career: "Career"
     music: "Music"

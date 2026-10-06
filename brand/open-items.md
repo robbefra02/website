@@ -15,7 +15,7 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Post model: one Category per post (= menu item, max 6-7), free Subtags (= filter buttons on the category page, generated from the posts). Same slug across languages links translations.
 - Notion: page "🌐 website" under Robbe, with a Posts database (Title, Status, Date, Category, Subtags, Language, Slug, Summary, Cover, Featured, Live URL) and one example post. ✏️ callouts = private notes, not published.
 
-- Categories confirmed: Projects, School, Travel, Repair, Career, Music.
+- Categories confirmed: Projects, School, Travel, Audio/Video/Foto (key `media`, replaced Repair on 6 Oct 2026), Career, Music.
 - Sync publishes straight to the live site: setting "Ready to publish" in Notion is the approval. No PR per post.
 - Cursor effect toned down (round 3.1): gentle bend, not a lens/zoom.
 - YouTube embeds use a click-to-load thumbnail (youtube-nocookie), so YouTube only loads after a visitor clicks (GDPR-friendly).
@@ -38,6 +38,9 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Coding session 1 (foundation): Jekyll deploy workflow, base layout, header with theme toggle, `/nl/` placeholder page.
 - Coding session 2: category menu, wave field with pause button (remembered between pages), footer with contact links, 6 placeholder category pages, workflow on Node 24 actions.
 - Coding session 3: home page (hero, "right now" panel from `_data/now.yml`, newest posts), post cards, basic post page, dates per language, 5 placeholder posts in `nl/_posts/`.
+- Herstellingen replaced by Audio/Video/Foto (key `media`), on the site and in Notion.
+- Coding session 4: category pages as a list with subtag filter buttons (filter.js, shareable as /nl/travel/#motorcycle).
+- Coding session 5: full post page: reading time, clickable subtags, image captions (figure include), click-to-load YouTube (video include), "Meer in ...", hreflang between language versions.
 
 ## Launch checklist (when /nl/ replaces the old site)
 - [ ] Delete all posts with `placeholder: true` (`nl/_posts/`)

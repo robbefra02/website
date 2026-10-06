@@ -9,22 +9,22 @@
 |---|---|
 | Fields (Title, Date, Category, Subtags, Language, Slug, Summary, Cover, Featured) | Front matter at the top of the file |
 | Text, headings, lists, quotes | Normal Markdown |
-| Image (uploaded) | Downloaded to `/assets/posts/<slug>/01.jpg, 02.jpg...` (Notion image links expire after ~1 hour) |
+| Image (uploaded) | Downloaded to `/assets/posts/<slug>/01.jpg, 02.jpg...` (Notion image links expire after ~1 hour), written as `{% include figure.html src=... alt=... caption=... %}` |
 | Image caption | Alt text (for screen readers) and visible caption |
-| YouTube video block or YouTube link on its own line | `{% include video.html youtube="..." %}` - a privacy-friendly embed (youtube-nocookie) |
+| YouTube video block or YouTube link on its own line | `{% include video.html youtube="..." caption="..." %}` - nothing loads from YouTube until the visitor clicks play (youtube-nocookie) |
 | Uploaded video file (small) | Downloaded to `/assets/posts/<slug>/` and shown with a `<video>` player |
 | Callout with the ✏️ icon | **Skipped** - private notes to yourself, never published |
 
 ## Where files will live once the Jekyll site exists
 
 ```
-nl/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /nl/repair/portal-gun-nokia-charger/
-en/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /en/repair/portal-gun-nokia-charger/
+nl/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /nl/projects/portal-gun-nokia-charger/
+en/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /en/projects/portal-gun-nokia-charger/
 assets/posts/portal-gun-nokia-charger/
   01.jpg
 nl/
   index.html          ← home: all posts, newest first
-  repair/index.html   ← category page: posts with category "repair" + subtag filter buttons
+  projects/index.html ← category page: posts with category "projects" + subtag filter buttons
 en/ ...
 ```
 

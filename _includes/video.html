@@ -1,0 +1,22 @@
+{%- comment -%}
+  A YouTube video that only loads after a click (privacy: nothing is sent to YouTube/Google before that).
+  Use in a post:
+    {% include video.html youtube="dQw4w9WgXcQ" caption="What the video shows" %}
+  Optional: poster="/assets/posts/<slug>/video.jpg" = your own still image (the sync can save one).
+  Without JavaScript the play area is a normal link to the video on YouTube.
+  Posts are rendered before their layout, so this include looks up the language text itself.
+{%- endcomment -%}
+{%- assign vt = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
+<figure class="video">
+  <a class="video-facade" href="https://www.youtube.com/watch?v={{ include.youtube }}"
+     data-youtube="{{ include.youtube }}" data-title="{{ include.caption | default: vt.video_play | escape }}">
+    {%- if include.poster %}
+    <img src="{{ include.poster }}" alt="" width="1280" height="720" loading="lazy">
+    {%- endif %}
+    <span class="video-play" aria-hidden="true"><svg focusable="false"><use href="#icon-play"/></svg></span>
+    <span class="video-note">{{ vt.video_play }} <span aria-hidden="true">·</span> {{ vt.video_note }}</span>
+  </a>
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>

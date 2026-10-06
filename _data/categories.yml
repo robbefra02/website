@@ -1,10 +1,10 @@
 # The main sections of the site, in menu order.
-# The key is used in web addresses (/nl/repair/) and in a post's front matter (category: repair).
+# The key is used in web addresses (/nl/media/) and in a post's front matter (category: media).
 # The visible name per language lives in _data/i18n.yml under "categories".
 # Adding a category: add a key here, a name in i18n.yml, and a page in /nl/<key>/index.html.
 - projects
 - school
 - travel
-- repair
+- media
 - career
 - music

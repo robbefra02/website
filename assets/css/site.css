@@ -16,6 +16,8 @@
    9. Home page (hero + "right now")
    10. Post cards and feed
    11. Post page
+   12. Category page: filter buttons and post list
+   13. Media in posts: images with captions, video
    ========================================================================== */
 
 
@@ -307,7 +309,7 @@ main > * + * { margin-top: var(--space-5); }
 /* --------------------------------------------------------------------------
    6. TEXT CONTENT
    -------------------------------------------------------------------------- */
-h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading); text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading); text-wrap: balance; overflow-wrap: break-word; } /* break a too-long word rather than overflow a phone screen */
 
 .hero h1 {
   font-size: var(--text-hero);
@@ -499,7 +501,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading
 
 
 /* --------------------------------------------------------------------------
-   11. POST PAGE (basic version; coding session 5 adds more)
+   11. POST PAGE
    -------------------------------------------------------------------------- */
 .back-link {
   display: inline-flex;
@@ -543,4 +545,157 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: var(--weight-heading
   border-left: var(--indicator-width) solid var(--color-accent);
   font-family: var(--font-display);
   font-size: var(--text-h3);
+}
+
+a.tag { text-decoration: none; }          /* subtags on a post link to the filtered category list */
+a.tag:hover { border-color: var(--color-accent); }
+
+.post-translations { margin-top: var(--space-3); font-size: var(--text-small); color: var(--color-text-muted); }
+
+.prose img { width: 100%; height: auto; border-radius: var(--radius-md); } /* plain Markdown images */
+.prose h3 { font-size: var(--text-h3); line-height: var(--leading-snug); margin-top: var(--space-6); }
+.prose hr { border: 0; border-top: var(--border-width) solid var(--color-border); margin-block: var(--space-7); }
+.prose code {
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+  font-size: .9em; /* relative to the text around it, so it works in headings too */
+}
+
+
+/* --------------------------------------------------------------------------
+   12. CATEGORY PAGE - filter buttons and post list
+   -------------------------------------------------------------------------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.chip {
+  min-height: var(--target-sm);
+  padding: var(--pad-btn-sm);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+  font: var(--weight-ui) var(--text-small) var(--font-body);
+  cursor: pointer;
+  transition: box-shadow var(--duration-base), border-color var(--duration-base);
+}
+.chip span { margin-left: var(--space-1); color: var(--color-text-accent); font-weight: var(--weight-strong); } /* the count */
+.chip:hover { border-color: rgba(var(--halo-rgb), .5); box-shadow: var(--glow-halo); }
+
+/* The active filter: orange pill, like the active menu item */
+.chip[aria-pressed="true"] {
+  border-color: transparent;
+  background: var(--color-accent-gradient);
+  color: var(--color-on-accent);
+  box-shadow: var(--inner-shine), var(--glow-accent);
+}
+.chip[aria-pressed="true"] span { color: var(--color-on-accent); }
+
+.post-count { margin-bottom: var(--space-4); font-size: var(--text-small); color: var(--color-text-muted); }
+
+.post-list { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+
+/* One row: small image left, text right */
+.post-row {
+  display: grid;
+  grid-template-columns: var(--thumb-width-sm) minmax(0, 1fr); /* minmax(0, ...): the text column may shrink below its longest word */
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color var(--duration-fast), border-color var(--duration-fast);
+}
+.post-row:hover { background: var(--color-surface-hover); border-color: var(--color-border); }
+/* 30rem and wider: room for a bigger thumbnail (media queries can't use var()) */
+@media (min-width: 30rem) {
+  .post-row { grid-template-columns: var(--thumb-width) minmax(0, 1fr); gap: var(--space-4); }
+}
+
+.post-row img,
+.thumb-empty {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hover);
+}
+.thumb-empty { display: grid; place-items: center; color: var(--color-border-ui); }
+
+.post-row h3 { font-size: var(--text-h3); font-weight: var(--weight-title); line-height: var(--leading-snug); overflow-wrap: anywhere; }
+.post-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-1);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+.post-row-meta span { color: var(--color-text-accent); overflow-wrap: anywhere; }
+
+
+/* --------------------------------------------------------------------------
+   13. MEDIA IN POSTS - images with captions, click-to-play video
+   -------------------------------------------------------------------------- */
+.post-figure,
+.video { margin-block: var(--space-6); }
+
+.post-figure img { width: 100%; height: auto; border-radius: var(--radius-md); }
+
+figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+/* The play area before clicking: same shape as the video (16:9) */
+.video-facade,
+.video-player {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-solid);
+}
+.video-facade img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Big orange play button in the middle */
+.video-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  width: var(--play-size);
+  height: var(--play-size);
+  border-radius: 50%;
+  background: var(--color-accent-gradient);
+  color: var(--color-on-accent);
+  box-shadow: var(--inner-shine), var(--glow-accent);
+  transition: box-shadow var(--duration-base);
+}
+.video-play svg { width: var(--play-icon); height: var(--play-icon); }
+.video-facade:hover .video-play { box-shadow: var(--inner-shine), var(--glow-accent-hover); }
+
+/* Small note in the corner: tells visitors the video comes from YouTube before they click */
+.video-note {
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-solid); /* solid, not glass: text on a photo needs a guaranteed background */
+  color: var(--color-text);
+  font-size: var(--text-caption);
 }
