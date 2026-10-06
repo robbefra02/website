@@ -5,7 +5,7 @@ title: "Flux capacitor van een Plumbus vervangen"
 date: 2026-09-28
 lang: nl
 slug: plumbus-flux-capacitor
-category: repair
+category: projects
 tags: [soldering, plumbus]
 summary: "De Plumbus deed niks meer. Bleek gewoon stof op de flux capacitor te zijn."
 cover: "https://picsum.photos/seed/plumbus/1200/800"

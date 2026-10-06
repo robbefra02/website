@@ -15,7 +15,7 @@ Things that are decided "later". Read this at the start of every brand or site s
 - Post model: one Category per post (= menu item, max 6-7), free Subtags (= filter buttons on the category page, generated from the posts). Same slug across languages links translations.
 - Notion: page "🌐 website" under Robbe, with a Posts database (Title, Status, Date, Category, Subtags, Language, Slug, Summary, Cover, Featured, Live URL) and one example post. ✏️ callouts = private notes, not published.
 
-- Categories confirmed: Projects, School, Travel, Repair, Career, Music.
+- Categories confirmed: Projects, School, Travel, Audio/Video/Foto (key `media`, replaced Repair on 6 Oct 2026), Career, Music.
 - Sync publishes straight to the live site: setting "Ready to publish" in Notion is the approval. No PR per post.
 - Cursor effect toned down (round 3.1): gentle bend, not a lens/zoom.
 - YouTube embeds use a click-to-load thumbnail (youtube-nocookie), so YouTube only loads after a visitor clicks (GDPR-friendly).

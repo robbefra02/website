@@ -4,7 +4,7 @@ Rules for every coding session on this repo. Read this first, then `/brand/brand
 
 ## What this is
 
-Robbe Fransen's personal site: a **personal log** (projects, school, travel, repairs, career, music) he links people to instead of his Instagram. Live at https://www.robbefransen.be, hosted on GitHub Pages from `main`. Languages: Dutch first (`/nl/`), English (`/en/`) and French (`/fr/`) later.
+Robbe Fransen's personal site: a **personal log** (projects, school, travel, audio/video/photo, career, music) he links people to instead of his Instagram. Live at https://www.robbefransen.be, hosted on GitHub Pages from `main`. Languages: Dutch first (`/nl/`), English (`/en/`) and French (`/fr/`) later.
 
 **The owner is learning HTML, CSS and JS.** He must be able to read and understand every line. Optimize for clarity over cleverness, always.
 
@@ -63,7 +63,8 @@ Posts are written in Notion (Robbe → 🌐 website → Posts database) and sync
 - Post files: `<lang>/_posts/YYYY-MM-DD-<slug>.md` (so `nl/_posts/...`) with front matter: `title, date, lang, slug, category, tags, summary, cover, featured, notion_id`. Example: `/brand/examples/`. The folder gives the language in the address: `/nl/<category>/<slug>/` (see `defaults` in `_config.yml`). Don't use `_posts/nl/`: Jekyll then drops the language from the address.
 - Posts with `placeholder: true` are fake Rick and Morty posts for testing the design. Delete them before launch.
 - Images: `assets/posts/<slug>/01.jpg, 02.jpg...` (download them - Notion links expire after about an hour).
-- **Categories** (menu items, exactly one per post): projects, school, travel, repair, career, music. Adding one is a deliberate site change.
+- **Categories** (menu items, exactly one per post): projects, school, travel, media, career, music. Adding one is a deliberate site change. The key is the address and front matter value; the visible name comes from `_data/i18n.yml` (`media` = "Audio/Video/Foto").
+  Notion Category option → site key: Projects → `projects`, School → `school`, Travel → `travel`, Audio/Video/Foto → `media`, Career → `career`, Music → `music`.
 - **Subtags** (`tags`): free, lowercase-with-dashes. Category pages show filter chips built from the tags their posts use.
 - Same `slug` across languages = translations of each other (link them with `hreflang`).
 - YouTube: use the click-to-load include (`youtube-nocookie.com`, thumbnail first). Never a plain iframe.

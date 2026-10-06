@@ -18,13 +18,13 @@
 ## Where files will live once the Jekyll site exists
 
 ```
-nl/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /nl/repair/portal-gun-nokia-charger/
-en/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /en/repair/portal-gun-nokia-charger/
+nl/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /nl/projects/portal-gun-nokia-charger/
+en/_posts/2026-10-05-portal-gun-nokia-charger.md   ← becomes /en/projects/portal-gun-nokia-charger/
 assets/posts/portal-gun-nokia-charger/
   01.jpg
 nl/
   index.html          ← home: all posts, newest first
-  repair/index.html   ← category page: posts with category "repair" + subtag filter buttons
+  projects/index.html ← category page: posts with category "projects" + subtag filter buttons
 en/ ...
 ```
 

@@ -21,7 +21,7 @@ nl:
     projects: "Projecten"
     school: "School"
     travel: "Reizen"
-    repair: "Herstellingen"
+    media: "Audio/Video/Foto"
     career: "Carrière"
     music: "Muziek"
 
@@ -44,6 +44,6 @@ en:
     projects: "Projects"
     school: "School"
     travel: "Travel"
-    repair: "Repair"
+    media: "Audio/Video/Photo"
     career: "Career"
     music: "Music"

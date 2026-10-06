@@ -292,7 +292,7 @@ A dry joke about yourself or the situation, yes. Mocking people, no.
 
 | Field | Rule |
 |---|---|
-| Category | Exactly one: Projects, School, Travel, Repair, Career, Music. Adding a category = a small site change (menu item). |
+| Category | Exactly one: Projects, School, Travel, Audio/Video/Foto (`media`), Career, Music. Adding a category = a small site change (menu item). |
 | Subtags | Free, lowercase-with-dashes (`3d-printing`, `hong-kong`). Reuse existing ones. They become filter chips on the category page automatically. |
 | Slug | lowercase-with-dashes, same for every language version of a post. |
 | Language | NL first. EN and FR versions are separate rows with the same slug. |

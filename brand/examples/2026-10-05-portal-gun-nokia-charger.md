@@ -4,8 +4,8 @@ title: "Fixed a portal gun with a Nokia charger"
 date: 2026-10-05
 lang: en
 slug: portal-gun-nokia-charger          # same slug in NL/EN/FR = the site links the translations
-category: repair                         # one main section (menu item)
-tags: [soldering, portal-gun]            # subtags = filter buttons on the Repair page
+category: projects                       # one main section (menu item)
+tags: [soldering, portal-gun]            # subtags = filter buttons on the Projects page
 summary: "The portal gun stopped portaling. Turned out to be a cold solder joint and a very confused Morty."
 cover: /assets/posts/portal-gun-nokia-charger/01.jpg   # empty Cover field = first image in the post
 featured: false
